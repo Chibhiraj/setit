@@ -44,6 +44,23 @@ export default function Footer() {
       >
         <i className="fab fa-instagram"></i>
       </a>
+      <div>
+        <p>
+          
+        </p>
+      </div>
+      <div>
+        <p>
+
+        </p>
+      </div>
+          <p>
+                <i className="fas fa-envelope me-3"></i>
+                cbrsetitirupur@gmail.com
+     
+              <p><i className="fas fa-phone me-3"></i>0421-2256626/9489043923</p>
+              </p>
+     
     </section>
   </div>
 
@@ -55,11 +72,7 @@ export default function Footer() {
               <h6 className="text-uppercase fw-bold mb-4">Address:</h6>
               <p><MDBIcon fas icon="home" /> 331/4T , இரண்டாம் தளம்,கோவை டிபார்ட்மெண்ட் ஸ்டோர் காம்ப்ளக்ஸ்,மாவட்ட தொழில் மையம் எதிரில், அவினாசி ரோடு , அனுப்பர்பாளையம் புதூர்,திருப்பூர் – 641652</p>
           <p><i className="fas fa-location me-2"></i><a href='https://maps.app.goo.gl/d44R9XVoZqLSRLQHA'>Location</a></p>
-              <p>
-                <i className="fas fa-envelope me-3"></i>
-                cbrsetitirupur@gmail.com
-              </p>
-              <p><i className="fas fa-phone me-3"></i>0421-2256626/9489043923</p>
+              
             </div>
           </div>
         </div>
