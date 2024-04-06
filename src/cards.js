@@ -73,7 +73,42 @@ export default function CardsRow() {
             கண்காணிப்பு கேமரா பொருத்துதல் மற்றும் சர்வீஸ்  (CCTV INSTALLATION AND SERVICE)
             </p>
           </div>
-          <MDBBtn href='#'>View Details -> </MDBBtn>
+          <Button onClick={toggleModal} variant="contained" color="primary">
+        View Details ->
+      </Button>
+
+      <Dialog open={isOpen} onClose={toggleModal}>
+        <DialogTitle>Details </DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            <TableContainer component={Paper}>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Name</TableCell>
+                    <TableCell>Phone Number</TableCell>
+                    <TableCell>Location</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {/* Example data */}
+                  <TableRow>
+                    <TableCell style={{color:blue}}>Kumar</TableCell>
+                    <TableCell>123-456-7890</TableCell>
+                    <TableCell> <a href='https://www.google.com/maps/dir//tiruppur+rstei/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x3ba907a7a56402af:0x2deaaf8daf2a725c?sa=X&ved=1t:3061&ictx=111'>Tirppur</a></TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Raj</TableCell>
+                    <TableCell>456-789-0123</TableCell>
+                    <TableCell>Tirppur</TableCell>
+                  </TableRow>
+                  {/* Add more rows as needed */}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </DialogContentText>
+        </DialogContent>
+      </Dialog>
         </div>
       </div>
       <div className="col">
@@ -83,7 +118,42 @@ export default function CardsRow() {
             <h5 className="card-title">Photography and  Videography</h5>
             <p className="card-text">போட்டோகிராபர் மற்றும் வீடியோகிராபர் (PHOTOGRAPHY & VIDEOGRAPHY)</p>
           </div>
-        <MDBBtn href='#'>View Details -></MDBBtn>
+          <Button onClick={toggleModal} variant="contained" color="primary">
+        View Details ->
+      </Button>
+
+      <Dialog open={isOpen} onClose={toggleModal}>
+        <DialogTitle>Details </DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            <TableContainer component={Paper}>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Name</TableCell>
+                    <TableCell>Phone Number</TableCell>
+                    <TableCell>Location</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {/* Example data */}
+                  <TableRow>
+                    <TableCell style={{color:blue}}>Kumar</TableCell>
+                    <TableCell>123-456-7890</TableCell>
+                    <TableCell> <a href='https://www.google.com/maps/dir//tiruppur+rstei/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x3ba907a7a56402af:0x2deaaf8daf2a725c?sa=X&ved=1t:3061&ictx=111'>Tirppur</a></TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Raj</TableCell>
+                    <TableCell>456-789-0123</TableCell>
+                    <TableCell>Tirppur</TableCell>
+                  </TableRow>
+                  {/* Add more rows as needed */}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </DialogContentText>
+        </DialogContent>
+      </Dialog>
         </div>
       </div>
       <div className="col">
@@ -95,7 +165,42 @@ export default function CardsRow() {
             ஹவுஸ் வயரிங் DETAILS (House Wiring) TECHNICIANS
             </p>
           </div>
-          <MDBBtn href='#'>View Details -></MDBBtn>
+          <Button onClick={toggleModal} variant="contained" color="primary">
+        View Details ->
+      </Button>
+
+      <Dialog open={isOpen} onClose={toggleModal}>
+        <DialogTitle>Details </DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            <TableContainer component={Paper}>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Name</TableCell>
+                    <TableCell>Phone Number</TableCell>
+                    <TableCell>Location</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {/* Example data */}
+                  <TableRow>
+                    <TableCell style={{color:blue}}>Kumar</TableCell>
+                    <TableCell>123-456-7890</TableCell>
+                    <TableCell> <a href='https://www.google.com/maps/dir//tiruppur+rstei/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x3ba907a7a56402af:0x2deaaf8daf2a725c?sa=X&ved=1t:3061&ictx=111'>Tirppur</a></TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Raj</TableCell>
+                    <TableCell>456-789-0123</TableCell>
+                    <TableCell>Tirppur</TableCell>
+                  </TableRow>
+                  {/* Add more rows as needed */}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </DialogContentText>
+        </DialogContent>
+      </Dialog>
         </div>
       </div>
       <div className="col">
@@ -107,7 +212,42 @@ export default function CardsRow() {
             பியூட்டிசியன்ஸ் DETAILS (BEAUTY PARLOR/ BEAUTICIAN)
             </p>
           </div>
-          <MDBBtn href='#'>View Details -></MDBBtn>
+          <Button onClick={toggleModal} variant="contained" color="primary">
+        View Details ->
+      </Button>
+
+      <Dialog open={isOpen} onClose={toggleModal}>
+        <DialogTitle>Details </DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            <TableContainer component={Paper}>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Name</TableCell>
+                    <TableCell>Phone Number</TableCell>
+                    <TableCell>Location</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {/* Example data */}
+                  <TableRow>
+                    <TableCell style={{color:blue}}>Kumar</TableCell>
+                    <TableCell>123-456-7890</TableCell>
+                    <TableCell> <a href='https://www.google.com/maps/dir//tiruppur+rstei/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x3ba907a7a56402af:0x2deaaf8daf2a725c?sa=X&ved=1t:3061&ictx=111'>Tirppur</a></TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Raj</TableCell>
+                    <TableCell>456-789-0123</TableCell>
+                    <TableCell>Tirppur</TableCell>
+                  </TableRow>
+                  {/* Add more rows as needed */}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </DialogContentText>
+        </DialogContent>
+      </Dialog>
         </div>
       </div>
       <div className="col">
@@ -119,7 +259,42 @@ export default function CardsRow() {
             எம்பிராய்டரி மற்றும் துணி ஓவியம் ARTIST DETAILS (EMBROIDERY & FABRIC PAINTING)
             </p>
           </div>
-          <MDBBtn href='#'>View Details -></MDBBtn>
+          <Button onClick={toggleModal} variant="contained" color="primary">
+        View Details ->
+      </Button>
+
+      <Dialog open={isOpen} onClose={toggleModal}>
+        <DialogTitle>Details </DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            <TableContainer component={Paper}>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Name</TableCell>
+                    <TableCell>Phone Number</TableCell>
+                    <TableCell>Location</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {/* Example data */}
+                  <TableRow>
+                    <TableCell style={{color:blue}}>Kumar</TableCell>
+                    <TableCell>123-456-7890</TableCell>
+                    <TableCell> <a href='https://www.google.com/maps/dir//tiruppur+rstei/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x3ba907a7a56402af:0x2deaaf8daf2a725c?sa=X&ved=1t:3061&ictx=111'>Tirppur</a></TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Raj</TableCell>
+                    <TableCell>456-789-0123</TableCell>
+                    <TableCell>Tirppur</TableCell>
+                  </TableRow>
+                  {/* Add more rows as needed */}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </DialogContentText>
+        </DialogContent>
+      </Dialog>
         </div>
       </div>
       <div className="col">
@@ -131,7 +306,42 @@ export default function CardsRow() {
             சணல் பைகள் தயாரிப்பாளர்கள் DETAILS (JUTE PRODUCTS )
             </p>
           </div>
-          <MDBBtn href='#'>View Details -></MDBBtn>
+          <Button onClick={toggleModal} variant="contained" color="primary">
+        View Details ->
+      </Button>
+
+      <Dialog open={isOpen} onClose={toggleModal}>
+        <DialogTitle>Details </DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            <TableContainer component={Paper}>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Name</TableCell>
+                    <TableCell>Phone Number</TableCell>
+                    <TableCell>Location</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {/* Example data */}
+                  <TableRow>
+                    <TableCell style={{color:blue}}>Kumar</TableCell>
+                    <TableCell>123-456-7890</TableCell>
+                    <TableCell> <a href='https://www.google.com/maps/dir//tiruppur+rstei/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x3ba907a7a56402af:0x2deaaf8daf2a725c?sa=X&ved=1t:3061&ictx=111'>Tirppur</a></TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Raj</TableCell>
+                    <TableCell>456-789-0123</TableCell>
+                    <TableCell>Tirppur</TableCell>
+                  </TableRow>
+                  {/* Add more rows as needed */}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </DialogContentText>
+        </DialogContent>
+      </Dialog>
         </div>
       </div>
       <div className="col">
@@ -143,7 +353,42 @@ export default function CardsRow() {
             தையல் கலைஞர் DETAILS (TAILORS)
             </p>
           </div>
-          <MDBBtn href='#'>View Details -></MDBBtn>
+          <Button onClick={toggleModal} variant="contained" color="primary">
+        View Details ->
+      </Button>
+
+      <Dialog open={isOpen} onClose={toggleModal}>
+        <DialogTitle>Details </DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            <TableContainer component={Paper}>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Name</TableCell>
+                    <TableCell>Phone Number</TableCell>
+                    <TableCell>Location</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {/* Example data */}
+                  <TableRow>
+                    <TableCell style={{color:blue}}>Kumar</TableCell>
+                    <TableCell>123-456-7890</TableCell>
+                    <TableCell> <a href='https://www.google.com/maps/dir//tiruppur+rstei/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x3ba907a7a56402af:0x2deaaf8daf2a725c?sa=X&ved=1t:3061&ictx=111'>Tirppur</a></TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Raj</TableCell>
+                    <TableCell>456-789-0123</TableCell>
+                    <TableCell>Tirppur</TableCell>
+                  </TableRow>
+                  {/* Add more rows as needed */}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </DialogContentText>
+        </DialogContent>
+      </Dialog>
         </div>
       </div>
       <div className="col">
@@ -155,7 +400,42 @@ export default function CardsRow() {
             போட்டோ ஃபிரேமிங் , லேமினேசன் மற்றும் ஸ்கிரீன் பிரிண்டிங் SERVICE ( PHOTO FRAMING , LAMINATION & SCREEN PRINTING SERVICE)
             </p>
           </div>
-          <MDBBtn href='#'>View Details -></MDBBtn>
+          <Button onClick={toggleModal} variant="contained" color="primary">
+        View Details ->
+      </Button>
+
+      <Dialog open={isOpen} onClose={toggleModal}>
+        <DialogTitle>Details </DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            <TableContainer component={Paper}>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Name</TableCell>
+                    <TableCell>Phone Number</TableCell>
+                    <TableCell>Location</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {/* Example data */}
+                  <TableRow>
+                    <TableCell style={{color:blue}}>Kumar</TableCell>
+                    <TableCell>123-456-7890</TableCell>
+                    <TableCell> <a href='https://www.google.com/maps/dir//tiruppur+rstei/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x3ba907a7a56402af:0x2deaaf8daf2a725c?sa=X&ved=1t:3061&ictx=111'>Tirppur</a></TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Raj</TableCell>
+                    <TableCell>456-789-0123</TableCell>
+                    <TableCell>Tirppur</TableCell>
+                  </TableRow>
+                  {/* Add more rows as needed */}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </DialogContentText>
+        </DialogContent>
+      </Dialog>
         </div>
       </div>
       <div className="col">
@@ -167,7 +447,42 @@ export default function CardsRow() {
             குளிரூட்டல் மற்றும் ஏர் கண்டிஷனிங் SERVICE TECHNICIANS (Refrigeration and Air-conditioning)
             </p>
           </div>
-          <MDBBtn href='#'>View Details -></MDBBtn>
+          <Button onClick={toggleModal} variant="contained" color="primary">
+        View Details ->
+      </Button>
+
+      <Dialog open={isOpen} onClose={toggleModal}>
+        <DialogTitle>Details </DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            <TableContainer component={Paper}>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Name</TableCell>
+                    <TableCell>Phone Number</TableCell>
+                    <TableCell>Location</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {/* Example data */}
+                  <TableRow>
+                    <TableCell style={{color:blue}}>Kumar</TableCell>
+                    <TableCell>123-456-7890</TableCell>
+                    <TableCell> <a href='https://www.google.com/maps/dir//tiruppur+rstei/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x3ba907a7a56402af:0x2deaaf8daf2a725c?sa=X&ved=1t:3061&ictx=111'>Tirppur</a></TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Raj</TableCell>
+                    <TableCell>456-789-0123</TableCell>
+                    <TableCell>Tirppur</TableCell>
+                  </TableRow>
+                  {/* Add more rows as needed */}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </DialogContentText>
+        </DialogContent>
+      </Dialog>
         </div>
       </div>
       <div className="col">
@@ -179,7 +494,42 @@ export default function CardsRow() {
             செயற்கை நகைகள் ARTISTS (Costume Jewellery Thread bangle etc..)
             </p>
           </div>
-          <MDBBtn href='#'>View Details -></MDBBtn>
+          <Button onClick={toggleModal} variant="contained" color="primary">
+        View Details ->
+      </Button>
+
+      <Dialog open={isOpen} onClose={toggleModal}>
+        <DialogTitle>Details </DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            <TableContainer component={Paper}>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Name</TableCell>
+                    <TableCell>Phone Number</TableCell>
+                    <TableCell>Location</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {/* Example data */}
+                  <TableRow>
+                    <TableCell style={{color:blue}}>Kumar</TableCell>
+                    <TableCell>123-456-7890</TableCell>
+                    <TableCell> <a href='https://www.google.com/maps/dir//tiruppur+rstei/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x3ba907a7a56402af:0x2deaaf8daf2a725c?sa=X&ved=1t:3061&ictx=111'>Tirppur</a></TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Raj</TableCell>
+                    <TableCell>456-789-0123</TableCell>
+                    <TableCell>Tirppur</TableCell>
+                  </TableRow>
+                  {/* Add more rows as needed */}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </DialogContentText>
+        </DialogContent>
+      </Dialog>
         </div>
       </div>
       <div className="col">
@@ -191,7 +541,42 @@ export default function CardsRow() {
           காகித கவர் , என்வலப் மற்றும் ஃபைல் தயாரிப்பாளர்கள் (Paper Cover, Envelop and File producers)
             </p>
           </div>
-          <MDBBtn href='#'>View Details -></MDBBtn>
+          <Button onClick={toggleModal} variant="contained" color="primary">
+        View Details ->
+      </Button>
+
+      <Dialog open={isOpen} onClose={toggleModal}>
+        <DialogTitle>Details </DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            <TableContainer component={Paper}>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Name</TableCell>
+                    <TableCell>Phone Number</TableCell>
+                    <TableCell>Location</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {/* Example data */}
+                  <TableRow>
+                    <TableCell style={{color:blue}}>Kumar</TableCell>
+                    <TableCell>123-456-7890</TableCell>
+                    <TableCell> <a href='https://www.google.com/maps/dir//tiruppur+rstei/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x3ba907a7a56402af:0x2deaaf8daf2a725c?sa=X&ved=1t:3061&ictx=111'>Tirppur</a></TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Raj</TableCell>
+                    <TableCell>456-789-0123</TableCell>
+                    <TableCell>Tirppur</TableCell>
+                  </TableRow>
+                  {/* Add more rows as needed */}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </DialogContentText>
+        </DialogContent>
+      </Dialog>
         </div>
       </div>
       <div className="col">
@@ -203,7 +588,42 @@ export default function CardsRow() {
             Organic காளான் Producers (MUSHROOM Producers)
             </p>
           </div>
-          <MDBBtn href='#'>View Details -></MDBBtn> 
+          <Button onClick={toggleModal} variant="contained" color="primary">
+        View Details ->
+      </Button>
+
+      <Dialog open={isOpen} onClose={toggleModal}>
+        <DialogTitle>Details </DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            <TableContainer component={Paper}>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Name</TableCell>
+                    <TableCell>Phone Number</TableCell>
+                    <TableCell>Location</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {/* Example data */}
+                  <TableRow>
+                    <TableCell style={{color:blue}}>Kumar</TableCell>
+                    <TableCell>123-456-7890</TableCell>
+                    <TableCell> <a href='https://www.google.com/maps/dir//tiruppur+rstei/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x3ba907a7a56402af:0x2deaaf8daf2a725c?sa=X&ved=1t:3061&ictx=111'>Tirppur</a></TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Raj</TableCell>
+                    <TableCell>456-789-0123</TableCell>
+                    <TableCell>Tirppur</TableCell>
+                  </TableRow>
+                  {/* Add more rows as needed */}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </DialogContentText>
+        </DialogContent>
+      </Dialog>
         </div>
       </div>
       <div className="col">
@@ -215,7 +635,42 @@ export default function CardsRow() {
             வீட்டுமுறை ஊதுபத்தி , Detergent, சோப்பு ஆயில், soap சோப்பு மற்றும் சாம்பிராணி தயாரித்தல்
             </p>
           </div>
-          <MDBBtn href='#'>View Details -></MDBBtn>
+          <Button onClick={toggleModal} variant="contained" color="primary">
+        View Details ->
+      </Button>
+
+      <Dialog open={isOpen} onClose={toggleModal}>
+        <DialogTitle>Details </DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            <TableContainer component={Paper}>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Name</TableCell>
+                    <TableCell>Phone Number</TableCell>
+                    <TableCell>Location</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {/* Example data */}
+                  <TableRow>
+                    <TableCell style={{color:blue}}>Kumar</TableCell>
+                    <TableCell>123-456-7890</TableCell>
+                    <TableCell> <a href='https://www.google.com/maps/dir//tiruppur+rstei/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x3ba907a7a56402af:0x2deaaf8daf2a725c?sa=X&ved=1t:3061&ictx=111'>Tirppur</a></TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Raj</TableCell>
+                    <TableCell>456-789-0123</TableCell>
+                    <TableCell>Tirppur</TableCell>
+                  </TableRow>
+                  {/* Add more rows as needed */}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </DialogContentText>
+        </DialogContent>
+      </Dialog>
         </div>
       </div>
       <div className="col">
@@ -227,7 +682,42 @@ export default function CardsRow() {
             வீட்டுமுறை அப்பளம், ஊறுகாய் & மசாலா பொடி தயாரிப்பாளர்கள் (PAPAD,PICKLE AND MASALA POWDER PRODUCERS)
             </p>
           </div>
-          <MDBBtn href='#'>View Details -></MDBBtn>
+          <Button onClick={toggleModal} variant="contained" color="primary">
+        View Details ->
+      </Button>
+
+      <Dialog open={isOpen} onClose={toggleModal}>
+        <DialogTitle>Details </DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            <TableContainer component={Paper}>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Name</TableCell>
+                    <TableCell>Phone Number</TableCell>
+                    <TableCell>Location</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {/* Example data */}
+                  <TableRow>
+                    <TableCell style={{color:blue}}>Kumar</TableCell>
+                    <TableCell>123-456-7890</TableCell>
+                    <TableCell> <a href='https://www.google.com/maps/dir//tiruppur+rstei/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x3ba907a7a56402af:0x2deaaf8daf2a725c?sa=X&ved=1t:3061&ictx=111'>Tirppur</a></TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Raj</TableCell>
+                    <TableCell>456-789-0123</TableCell>
+                    <TableCell>Tirppur</TableCell>
+                  </TableRow>
+                  {/* Add more rows as needed */}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </DialogContentText>
+        </DialogContent>
+      </Dialog>
         </div>
       </div>
       <div className="col">
@@ -240,7 +730,42 @@ export default function CardsRow() {
 
             </p>
           </div>
-          <MDBBtn href='#'>View Details -></MDBBtn>
+          <Button onClick={toggleModal} variant="contained" color="primary">
+        View Details ->
+      </Button>
+
+      <Dialog open={isOpen} onClose={toggleModal}>
+        <DialogTitle>Details </DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            <TableContainer component={Paper}>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Name</TableCell>
+                    <TableCell>Phone Number</TableCell>
+                    <TableCell>Location</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {/* Example data */}
+                  <TableRow>
+                    <TableCell style={{color:blue}}>Kumar</TableCell>
+                    <TableCell>123-456-7890</TableCell>
+                    <TableCell> <a href='https://www.google.com/maps/dir//tiruppur+rstei/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x3ba907a7a56402af:0x2deaaf8daf2a725c?sa=X&ved=1t:3061&ictx=111'>Tirppur</a></TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Raj</TableCell>
+                    <TableCell>456-789-0123</TableCell>
+                    <TableCell>Tirppur</TableCell>
+                  </TableRow>
+                  {/* Add more rows as needed */}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </DialogContentText>
+        </DialogContent>
+      </Dialog>
         </div>
       </div>
       
