@@ -9,8 +9,10 @@ import {
   MDBNavbarLink,
   MDBCollapse
 } from 'mdb-react-ui-kit';
+import { Link } from 'react-router' 
 
 import { MDBIcon } from 'mdb-react-ui-kit';
+import Button from "react-bootstrap/Button";
 
 export default function Navbar() {
   const [openNav, setOpenNav] = useState(false);
@@ -35,15 +37,15 @@ export default function Navbar() {
               </MDBNavbarLink>
             </MDBNavbarItem>
             <MDBNavbarItem>
-              <MDBNavbarLink href='#'>Our Services</MDBNavbarLink>
+              <MDBNavbarLink href='cards.js'>Our Services</MDBNavbarLink>
             </MDBNavbarItem>
             <MDBNavbarItem>
-              <MDBNavbarLink href='#contact-us'>Contact us</MDBNavbarLink>
+              <MDBNavbarLink href='contact-us'>Contact us</MDBNavbarLink>
             </MDBNavbarItem>
-            <MDBNavbarItem className="ms-auto"> {/* 'ms-auto' class pushes the item to the right */}
-        <MDBNavbarLink href='https://docs.google.com/forms/d/e/1FAIpQLScWEie-77JOjm9ORpTUP1XfhLufQ-H3rJCZXKdos1q1FNrzVA/viewform'>
-          Register now
-        </MDBNavbarLink>
+            <MDBNavbarItem className="ms-auto">
+        <Button href='https://docs.google.com/forms/d/e/1FAIpQLScWEie-77JOjm9ORpTUP1XfhLufQ-H3rJCZXKdos1q1FNrzVA/viewform'>
+          Apply now
+        </Button>
       </MDBNavbarItem>
           </MDBNavbarNav>
         </MDBCollapse>
