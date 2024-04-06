@@ -5,6 +5,7 @@ import Navbar from './navbar';
 import Details from './details';
 import Logo from './img/logo.jpg';
 import Card from './cards.js';
+import Gallery from './gallery'
 import Button from "react-bootstrap/Button";
 import './App.css';
 
@@ -40,6 +41,11 @@ function App() {
     </p>
             <Button href='https://docs.google.com/forms/d/e/1FAIpQLScWEie-77JOjm9ORpTUP1XfhLufQ-H3rJCZXKdos1q1FNrzVA/viewform?usp=sf_link'>Apply here</Button>
         </div>
+      <div style={{ textAlign: 'center' }}>
+        <h1>Gallery</h1>
+      </div>
+
+      <Gallery />
       <div style={{ textAlign: 'center' }}>
         <h1>Contact Us</h1>
       </div>
