@@ -1,14 +1,19 @@
 
-import React from 'react';
-import {
-  MDBBtn,
-} from 'mdb-react-ui-kit';
+import React, { useState } from 'react';
+import { Button, Dialog, DialogTitle, DialogContent, DialogContentText, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
+import { MDBBtn } from 'mdb-react-ui-kit';
 
 import cr from './img/cr.avif';import ctv from './img/cctv.webp';import Videography from './img/videography.webp';import hw from './img/hw.webp';import ups from './img/ups.webp';import bp from './img/bp.webp';import emb from './img/emb.jpg';import jute from './img/jute.webp';
 import tailor from './img/tailors.png';import lamination from './img/lam.webp';import ac from './img/ac.webp';import art from './img/art.webp';
 import paper from './img/paper-bags.webp';import org from './img/herbal-soaps.webp';import mush from './img/mush.webp';import masal from './img/masal.webp';import toy from './img/toy.webp';
 import { auto } from '@popperjs/core';
+import { blue } from '@mui/material/colors';
 export default function CardsRow() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleModal = () => {
+    setIsOpen(!isOpen);
+  };
   return (
       
       <div className="row row-cols-1 row-cols-md-3 g-4" style={{padding:20}}>
@@ -21,7 +26,42 @@ export default function CardsRow() {
             செல்போன்; பழுதுபார்த்தல் மற்றும் சர்வீஸ் TECHNCIANS  (CELLPHONE REPAIRE)
             </p>
           </div>
-            <MDBBtn href='#'>View Details -></MDBBtn>
+          <Button onClick={toggleModal} variant="contained" color="primary">
+        View Details ->
+      </Button>
+
+      <Dialog open={isOpen} onClose={toggleModal}>
+        <DialogTitle>Details </DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            <TableContainer component={Paper}>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Name</TableCell>
+                    <TableCell>Phone Number</TableCell>
+                    <TableCell>Location</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {/* Example data */}
+                  <TableRow>
+                    <TableCell style={{color:blue}}>Kumar</TableCell>
+                    <TableCell>123-456-7890</TableCell>
+                    <TableCell> <a href='https://www.google.com/maps/dir//tiruppur+rstei/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x3ba907a7a56402af:0x2deaaf8daf2a725c?sa=X&ved=1t:3061&ictx=111'>Tirppur</a></TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Raj</TableCell>
+                    <TableCell>456-789-0123</TableCell>
+                    <TableCell>Tirppur</TableCell>
+                  </TableRow>
+                  {/* Add more rows as needed */}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </DialogContentText>
+        </DialogContent>
+      </Dialog>
         </div>
       </div>
       <div className="col">
