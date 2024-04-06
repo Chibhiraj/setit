@@ -13,6 +13,7 @@ function App() {
   return (
     <div>
       <Navbar />
+      
       <div>
         <p></p>
       </div>
@@ -23,6 +24,14 @@ function App() {
       <div>
         <p></p>
       </div>
+      <div className='offers' style={{padding:50,fontSize:22,textAlign:'center'}}>
+        <p className="blinking-text" >
+        <bold>
+          RSETI திருப்பூரின் இலவச பயிற்சி விவரங்கள் மற்றும் முன்பதிவு செய்ய கீழே உள்ள லிங்கை கிளிக் செய்யவும்....
+        </bold>
+    </p>
+            <Button href='https://docs.google.com/forms/d/e/1FAIpQLScWEie-77JOjm9ORpTUP1XfhLufQ-H3rJCZXKdos1q1FNrzVA/viewform?usp=sf_link'>Apply here</Button>
+        </div>
         <Header />
         <div>
         <p></p>
