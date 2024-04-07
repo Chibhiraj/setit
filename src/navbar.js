@@ -1,29 +1,28 @@
 import React, { useState } from 'react';
-import {
-  MDBContainer,
-  MDBNavbar,
-  MDBNavbarBrand,
-  MDBNavbarToggler,
-  MDBNavbarNav,
-  MDBNavbarItem,
-  MDBNavbarLink,
-  MDBCollapse
-} from 'mdb-react-ui-kit';
-import { Link } from 'react-router' 
-
-import { MDBIcon } from 'mdb-react-ui-kit';
+import { MDBContainer, MDBNavbar, MDBNavbarBrand, MDBNavbarToggler, MDBNavbarNav, MDBNavbarItem, MDBNavbarLink, MDBCollapse } from 'mdb-react-ui-kit';
 import Button from "react-bootstrap/Button";
-
-// Import your image file
+import { MDBIcon, MDBModal, MDBModalBody } from 'mdb-react-ui-kit';
 import logoImage from './img/rseti.jpg';
+import { useNavigate } from 'react-router-dom';
+import LoginPage from './login';
+
 
 export default function Navbar() {
+  
   const [openNav, setOpenNav] = useState(false);
+  
+ 
+  const navigate = useNavigate(); // Initialize useNavigate hook
+
+  const handleLoginButtonClick = () => {
+    // Redirect to the login page component
+    window.location.href = 'index.html';
+  };
 
   return (
-    <MDBNavbar expand='lg' light bgColor='light' style={{padding:5}} className="sticky-top">
+    <div>
+    <MDBNavbar expand='lg' light bgColor='light' style={{ padding: 5 }} className="sticky-top">
       <MDBContainer fluid>
-        {/* Place the image within MDBNavbarBrand */}
         <MDBNavbarBrand href='#'>
           <img src={logoImage} alt="Logo" style={{ maxHeight: '50px' }} />
         </MDBNavbarBrand>
@@ -49,13 +48,19 @@ export default function Navbar() {
               <MDBNavbarLink href='contact-us'>Contact us</MDBNavbarLink>
             </MDBNavbarItem>
             <MDBNavbarItem className="ms-auto">
-              <Button href='https://docs.google.com/forms/d/e/1FAIpQLScWEie-77JOjm9ORpTUP1XfhLufQ-H3rJCZXKdos1q1FNrzVA/viewform'>
-                Apply now
-              </Button>
+              <div>
+                <Button href='https://docs.google.com/forms/d/e/1FAIpQLScWEie-77JOjm9ORpTUP1XfhLufQ-H3rJCZXKdos1q1FNrzVA/viewform'>
+                  Apply now
+                </Button>
+                <span style={{ margin: '0 10px' }}></span>
+              </div>
             </MDBNavbarItem>
+                <LoginPage/>
           </MDBNavbarNav>
         </MDBCollapse>
       </MDBContainer>
     </MDBNavbar>
+
+    </div>
   );
 }
