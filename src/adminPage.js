@@ -1,8 +1,25 @@
-import React, { useState } from 'react';
+
 import { Modal, Button, Form, Table } from 'react-bootstrap';
 import Logo from './img/logo.jpg';
 import img from './img/gradient-blue-abstract-background-smooth-dark-blue-with-black-vignette-studio.jpg';
 import Footer from './footer';
+import { Navigate, useNavigate } from 'react-router';
+// import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import React, { useState } from 'react';
+// import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+// import Button from "@mui/material/Button";
+import Container from "@mui/material/Container";
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import Paper from "@mui/material/Paper";
+import Select from "@mui/material/Select";
+
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
 
 function RowList() {
   const [rows, setRows] = useState([]);
@@ -16,6 +33,12 @@ function RowList() {
     location: ''
   });
   const [searchTerm, setSearchTerm] = useState('');
+
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    navigate('/');
+  };
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -115,12 +138,12 @@ function RowList() {
       <div><p></p></div>
       <center>
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-          <h3 style={{ textAlign: 'center' }}>Welcome to Admin Panel</h3>
+        <h3 style={{ textAlign: 'center', animation: 'blinking 1s infinite' }}>Welcome to Admin Panel</h3>
         </div>
       
         <Modal show={showModal} onHide={handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>{formData.id ? 'Update Row' : 'Add Row'}</Modal.Title>
+            <Modal.Title>{formData.id ? 'Updating'  : 'Add Member'}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Form>
@@ -173,7 +196,7 @@ function RowList() {
             </Form>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
+            <Button variant="danger" onClick={handleClose}>
               Close
             </Button>
             <Button variant="primary" onClick={handleSubmit}>
@@ -181,43 +204,52 @@ function RowList() {
             </Button>
           </Modal.Footer>
         </Modal>  
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '20px' }}>
-  <Form.Control
-    type="text"
-    placeholder="Search..."
-    value={searchTerm}
-    onChange={handleSearch}
-    style={{ margin: '0 10px', width: '300px' }}
-  />
-  {filteredRows.length > 0 && (
-    <p style={{ margin: 0 }}>Number of Members: {filteredRows.length}</p>
-  )}
-  <Button variant="danger" onClick={handleShow}>Add Member</Button>
-</div>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '20px', paddingLeft: 60, paddingRight: 60 }}>
+      <Form.Control
+        type="text"
+        placeholder="Search..."
+        value={searchTerm}
+        onChange={handleSearch}
+        style={{ margin: '0 10px', width: '300px' }}
+      />
+      {filteredRows.length > 0 && (
+        <p style={{ margin: 0 }}>Number of Members: {filteredRows.length}</p>
+      )}
+      <div>
+        <Button variant="primary" onClick={handleShow}>+ Add Member</Button>
+        <Button variant="danger" onClick={handleLogout} style={{ marginLeft: '10px' }}>Logout</Button>
+      </div>
+    </div>
 <div><div>
         <p></p>
       </div> </div>
-        <Table striped bordered hover responsive>
-          <thead style={{ backgroundColor: 'black', color: 'white' }}>
-            <tr>
-              <th>ID</th>
-              <th>Name</th>
-              <th>Phone Number</th>
-              <th>Designation</th>
-              <th>Location</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
+      </center>
+      <Container>
+
+      <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 65 ,fontfamily:'Calibri'}} aria-label="simple table">
+            <TableHead>
+            <TableRow sx={{color:'white'}}>
+               
+                <TableCell sx={{color:'white'}}>ID</TableCell>
+                <TableCell sx={{color:'white'}}>Name</TableCell>
+                <TableCell sx={{color:'white'}}>Phone Number</TableCell>
+                <TableCell sx={{color:'white'}}>Designation</TableCell>
+                <TableCell sx={{color:'white'}}>Location</TableCell>
+                <TableCell sx={{color:'white'}}>Action</TableCell>
+              </TableRow>
+            </TableHead>
+
+            <TableBody>
             {filteredRows.map((row) => (
-              <tr key={row.id}>
-                <td>{row.id}</td>
-                <td>{row.name}</td>
-                <td>{row.phoneNumber}</td>
-                <td>{row.designation}</td>
-                <td>{row.location}</td>
-                <td>
-                  <Button
+                  <TableRow key={row.id} sx={{ backgroundColor: row % 2 === 0 ? '#ffffff' : '#ffefc1' ,color:'red'}}>
+                    <TableCell>{row.id}</TableCell>
+                    <TableCell>{row.name}</TableCell>
+                    <TableCell>{row.phoneNumber}</TableCell>
+                    <TableCell>{row.designation}</TableCell>
+                    <TableCell>{row.location}</TableCell>
+                    <TableCell>
+                      <Button
                     variant="info"
                     onClick={() => handleUpdate(row)}
                     style={{ marginRight: '10px' }}
@@ -230,16 +262,16 @@ function RowList() {
                   >
                     Delete
                   </Button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </Table>
-
-      </center>
+                    </TableCell>
+                  </TableRow>
+                    ))}
+             </TableBody>
+          </Table>
+        </TableContainer>
       <div>
       </div>
-
+      </Container>
+      
       <div className="text-center p-4" style={{ backgroundColor: 'rgba(0, 0, 0, 0.05)', position: "absolute", bottom: 0, left: 0, right: 0 }}>
         © 2024 Copyright
         <a className="text-reset fw-bold"> RSETI</a>
