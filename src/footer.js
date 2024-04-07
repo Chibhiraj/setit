@@ -25,7 +25,7 @@ export default function Footer() {
               </h6>
               <div class="container p-4 pb-0">
 
-  <section className="mb-6      ">
+  <section className="mb-6 ">
     <h5> Follow us on</h5>
       <a
         className="btn text-white btn-floating m-1"
@@ -44,14 +44,25 @@ export default function Footer() {
       >
         <i className="fab fa-instagram"></i>
       </a>
+      <a
+        className="btn text-white btn-floating m-1"
+        style={{ backgroundColor: '#7AA2E3' }}
+        href="https://t.me/rseti0"
+        role="button"
+      >
+        <i className="fab fa-telegram"></i>
+      </a>
+      <a
+        className="btn text-white btn-floating m-1"
+        style={{ backgroundColor: '#FF0000' }}
+        href="https://www.youtube.com/channel/UCsY121Q6JHe3UrkEPWviJOQ"
+        role="button"
+      >
+        <i className="fab fa-youtube"></i>
+      </a>
       <div>
         <p>
           
-        </p>
-      </div>
-      <div>
-        <p>
-
         </p>
       </div>
           <p>
