@@ -21,17 +21,17 @@ function LoginModal() {
     event.preventDefault();
     // Simulate successful login
     if (username === 'admin' && password === '123') {
-      alert('Login successful');
+      navigate('/admin')
       // Reset form fields
       setUsername('');
       setPassword('');
       // Close modal after submission
-      setShowModal(false);
       // Navigate to the new page
       // scrollToBottom(); // Replace '/new-page' with the path of the new page
     } else {
       alert('Invalid username or password');
-      navigate('/new-'); // Replace '/new-page' with the path of the new page
+      navigate('/'); // Replace '/new-page' with the path of the new page
+      setShowModal(false);
 
       // You can display an error message or handle invalid credentials here
     }
@@ -42,7 +42,7 @@ function LoginModal() {
       <Button variant="outline" style={{ color: 'green', borderColor: 'green' }} onClick={handleLoginClick}>
         Login
       </Button>
-
+      
       <Modal show={showModal} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Login</Modal.Title>

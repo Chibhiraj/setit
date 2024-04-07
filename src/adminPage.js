@@ -117,8 +117,7 @@ function RowList() {
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
           <h3 style={{ textAlign: 'center' }}>Welcome to Admin Panel</h3>
         </div>
-        
-        <p></p>
+      
         <Modal show={showModal} onHide={handleClose}>
           <Modal.Header closeButton>
             <Modal.Title>{formData.id ? 'Update Row' : 'Add Row'}</Modal.Title>
@@ -195,7 +194,9 @@ function RowList() {
   )}
   <Button variant="danger" onClick={handleShow}>Add Member</Button>
 </div>
-<div></div>
+<div><div>
+        <p></p>
+      </div> </div>
         <Table striped bordered hover responsive>
           <thead style={{ backgroundColor: 'black', color: 'white' }}>
             <tr>

@@ -3,20 +3,14 @@ import './App.css';
 
 import HomePage from './homePage';
 import Admin from './adminPage'
-import { Router,Route } from 'react-router';
+import { Routes,Route } from 'react-router';
 
 function App() {
   return (
-    <div>
-{/*     
-      <Router>
-     
-        <Route path="/" element={<HomePage />} />
-      
-    </Router> */}
-    <HomePage/>
-    <Admin/>
-    </div>
+    <Routes>
+      <Route path="/" element={<HomePage/>} />
+      <Route path="/admin" element={<Admin/>} /> 
+  </Routes> 
   );
 }
 
