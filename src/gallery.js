@@ -31,19 +31,20 @@ const Gallery = () => {
           alt="Mountains in the Clouds"
         />
         <img
-          src={g4}
-          className="w-100 shadow-1-strong rounded mb-4"
-          alt="Boat on Calm Water"
-        />
-      </div>
-
-      <div className="col-lg-4 mb-4 mb-lg-0" style={{padding:20}}>
-        <img
           src={g6}
           className="w-100 shadow-1-strong rounded mb-4"
           alt="Waves at Sea"
           
         />
+      </div>
+
+      <div className="col-lg-4 mb-4 mb-lg-0" style={{padding:20}}>
+        <img
+          src={g4}
+          className="w-100 shadow-1-strong rounded mb-4"
+          alt="Boat on Calm Water"
+        />
+        
         <img
           src={g5}
           className="w-100 shadow-1-strong rounded mb-4"

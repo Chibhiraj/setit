@@ -1,50 +1,75 @@
-
-import { Modal, Button, Form, Table } from 'react-bootstrap';
-import Logo from './img/logo.jpg';
-import img from './img/gradient-blue-abstract-background-smooth-dark-blue-with-black-vignette-studio.jpg';
-import Footer from './footer';
-import { Navigate, useNavigate } from 'react-router';
-// import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
-import React, { useState } from 'react';
-// import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
-// import Button from "@mui/material/Button";
+import { Modal, Button, Form, Table,Row,Col } from "react-bootstrap";
+import Logo from "./img/logo.jpg";
+import img from "./img/gradient-blue-abstract-background-smooth-dark-blue-with-black-vignette-studio.jpg";
+import Footer from "./footer";
+import { Navigate, useNavigate } from "react-router";
+import React, { useState } from "react";
 import Container from "@mui/material/Container";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Paper from "@mui/material/Paper";
-import Select from "@mui/material/Select";
-
+import Card from '@mui/joy/Card';
+import CardContent from '@mui/joy/CardContent';
+import Checkbox from '@mui/joy/Checkbox';
+import Divider from '@mui/joy/Divider';
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+import axios from "axios";
 
 function RowList() {
   const [rows, setRows] = useState([]);
   const [showModal, setShowModal] = useState(false);
-  const [phoneNumberError, setPhoneNumberError] = useState('');
+  const [phoneNumberError, setPhoneNumberError] = useState("");
   const [formData, setFormData] = useState({
     id: null,
-    name: '',
-    phoneNumber: '',
-    designation: '',
-    location: ''
+    shopName: "",
+    ownerName: "",
+    phoneNumber: "",
+    address: "",
+    designation: "",
+    productLink: "",
+    location: "",
+    image: "",
   });
-  const [searchTerm, setSearchTerm] = useState('');
+
+  var shopName=formData.shopName;
+  var ownerName=formData.ownerName;
+  var phoneNumber=formData.phoneNumber;
+  var address=formData.address;
+  var designation=formData.designation;
+  var productLink=formData.productLink;
+  var location=formData.location;
+  const [searchTerm, setSearchTerm] = useState("");
 
   const navigate = useNavigate();
   const handleLogout = () => {
-    navigate('/');
+    navigate("/");
+  };
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // Function to handle image selection
+  const handleImageChange = (event) => {
+    const file = event.target.files[0]; // Get the first file selected by the user
+    // You can perform additional validation here if needed
+
+    setSelectedImage(file);
   };
 
+  // Function to toggle modal open/close
+  const toggleModal = () => {
+    setIsModalOpen(!isModalOpen);
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
-      [name]: value
+      [name]: value,
     }));
   };
 
@@ -57,19 +82,20 @@ function RowList() {
     setFormData(row);
     setShowModal(true);
   };
-
+  const url =
+  "mongodb+srv://chibhiraj:kN7LG7PhHXamwECO@cluster0.o2r8wsi.mongodb.net/setit";
   const handleSubmit = () => {
-    // Check if phone number is valid (10 digits)
+
     const isValidPhoneNumber = validatePhoneNumber(formData.phoneNumber);
 
     if (!isValidPhoneNumber) {
-      setPhoneNumberError('Invalid phone number');
-      alert('Enter valid phone number');
+      setPhoneNumberError("Invalid phone number");
+      alert("Enter valid phone number");
       return; // Don't proceed further if phone number is invalid
     }
 
     // Clear phone number error if previously set
-    setPhoneNumberError('');
+    setPhoneNumberError("");
 
     if (formData.id) {
       // Update existing row
@@ -82,13 +108,19 @@ function RowList() {
         ...prevRows,
         {
           id: prevRows.length + 1,
-          ...formData
-        }
+          ...formData,
+        },
       ]);
     }
     // Close the modal
     handleClose();
     updateIds(); // Update IDs after updating row
+    console.log(phoneNumber);
+    axios.post(url,{designation,location,address,ownerName,phoneNumber,productLink,shopName})
+
+    .then(()=>console.log('success'))
+    .catch((err)=> console.error(`Errr: ${err}`));
+    
   };
 
   const validatePhoneNumber = (phoneNumber) => {
@@ -101,10 +133,14 @@ function RowList() {
     setShowModal(false);
     setFormData({
       id: null,
-      name: '',
-      phoneNumber: '',
-      designation: '',
-      location: ''
+      shopName: "",
+      ownerName: "",
+      phoneNumber: "",
+      address: "",
+      designation: "",
+      productLink: "",
+      location: "",
+      image: "",
     });
   };
 
@@ -115,7 +151,7 @@ function RowList() {
     setRows((prevRows) =>
       prevRows.map((row, index) => ({
         ...row,
-        id: index + 1
+        id: index + 1,
       }))
     );
   };
@@ -131,32 +167,70 @@ function RowList() {
   );
 
   return (
-    <div style={{ padding: 10, backgroundSize: 'cover', position: 'relative', minHeight: '100vh' }}>
+    <div
+      style={{
+        padding: 10,
+        backgroundSize: "cover",
+        position: "relative",
+        minHeight: "100vh",
+      }}
+    >
       <div className="container" style={{ maxWidth: 500 }}>
-        <img src={Logo} className='img-fluid' alt='...' />
+        <img src={Logo} className="img-fluid" alt="..." />
       </div>
-      <div><p></p></div>
+      <div>
+        <p></p>
+      </div>
       <center>
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-        <h3 style={{ textAlign: 'center', animation: 'blinking 1s infinite' }}>Welcome to Admin Panel</h3>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: "column",
+          }}
+        >
+          <h3
+            style={{ textAlign: "center", animation: "blinking 1s infinite" }}
+          >
+            Welcome to Admin Panel
+          </h3>
         </div>
-      
+
+    
+   
         <Modal show={showModal} onHide={handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>{formData.id ? 'Updating'  : 'Add Member'}</Modal.Title>
+            <Modal.Title>{formData.id ? "Updating" : "Add Member"}</Modal.Title>
           </Modal.Header>
-          <Modal.Body>
+          <Modal.Body >
             <Form>
-              <Form.Group controlId="name">
-                <Form.Label>Name</Form.Label>
+            <Row>
+            <Col>
+              <Form.Group controlId="shopName">
+                <Form.Label>Brand/ Shop Name</Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder="Enter name"
-                  name="name"
-                  value={formData.name}
+                  placeholder="Enter Shop/Brand name"
+                  name="shopName"
+                  value={formData.shopName}
                   onChange={handleChange}
                 />
               </Form.Group>
+              </Col>
+              <Col>
+              <Form.Group controlId="ownerNname">
+                <Form.Label>Owner Name</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter Owner name"
+                  name="ownerName"
+                  value={formData.ownerName}
+                  onChange={handleChange}
+                />
+              </Form.Group>
+              </Col>
+              </Row>
               <Form.Group controlId="phoneNumber">
                 <Form.Label>Phone Number</Form.Label>
                 <Form.Control
@@ -167,22 +241,60 @@ function RowList() {
                   onChange={handleChange}
                 />
               </Form.Group>
+              <Form.Group controlId="address">
+                <Form.Label>Address</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Address"
+                  name="address"
+                  value={formData.address}
+                  onChange={handleChange}
+                />
+              </Form.Group>
               <Form.Group controlId="designation">
-                <Form.Label>Designation</Form.Label>
+                <Form.Label>Specializaion</Form.Label>
                 <Form.Select
                   aria-label="Designation"
                   name="designation"
                   value={formData.designation}
                   onChange={handleChange}
                 >
-                  <option value="">Select Designation</option>
-                  <option value="Cctv repair">Cctv repair</option>
+                  <option value="">Select Specializaion</option>
                   <option value="Ac repair">Ac repair</option>
+                  <option value="Beauty parlours">Beauty parlours</option>
+                  <option value="Cctv repair">Cctv repair</option>
+                  <option value="Cellphone Repair">Cellphone Repair</option>
+                  <option value="Costume designers">Costume designers</option>
+                  <option value="EMBROIDERY">EMBROIDERY</option>
+                  <option value="Framing">Framing</option>
+                  <option value="Home made masalas">Home made masalas</option>
+                  <option value="JUTE PRODUCTS">JUTE PRODUCTS</option>
                   <option value="Lamination">Lamination</option>
-                  <option value="Mechanic">Mechanic</option>
+                  <option value="Mushroom producers">Mushroom producers</option>
+                  <option value="Organics">Organics</option>
+                  <option value="Paper products">Paper products</option>
+                  <option value="Photography and Videography">
+                    Photography and Videography
+                  </option>
+                  <option value="SERVICE TECHNICIANS">
+                    SERVICE TECHNICIANS
+                  </option>
+                  <option value="Soft toys">Soft toys</option>
+                  <option value="TAILORS">TAILORS</option>
+                  <option value="Wiring">Wiring</option>
                 </Form.Select>
               </Form.Group>
 
+              <Form.Group controlId="product">
+                <Form.Label>Product Link</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter product link"
+                  name="productLink"
+                  value={formData.productLink}
+                  onChange={handleChange}
+                />
+              </Form.Group>
               <Form.Group controlId="location">
                 <Form.Label>Location</Form.Label>
                 <Form.Control
@@ -193,6 +305,14 @@ function RowList() {
                   onChange={handleChange}
                 />
               </Form.Group>
+              {/* <Form.Group controlId="image">
+                <Form.Label>Upload Image</Form.Label>
+                <Form.Control
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageChange}
+                />
+              </Form.Group> */}
             </Form>
           </Modal.Body>
           <Modal.Footer>
@@ -200,79 +320,141 @@ function RowList() {
               Close
             </Button>
             <Button variant="primary" onClick={handleSubmit}>
-              {formData.id ? 'Update' : 'Add'}
+              {formData.id ? "Update" : "Add"}
             </Button>
           </Modal.Footer>
-        </Modal>  
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '20px', paddingLeft: 60, paddingRight: 60 }}>
-      <Form.Control
-        type="text"
-        placeholder="Search..."
-        value={searchTerm}
-        onChange={handleSearch}
-        style={{ margin: '0 10px', width: '300px' }}
-      />
-      {filteredRows.length > 0 && (
-        <p style={{ margin: 0 }}>Number of Members: {filteredRows.length}</p>
-      )}
-      <div>
-        <Button variant="primary" onClick={handleShow}>+ Add Member</Button>
-        <Button variant="danger" onClick={handleLogout} style={{ marginLeft: '10px' }}>Logout</Button>
-      </div>
-    </div>
-<div><div>
-        <p></p>
-      </div> </div>
-      </center>
-      <Container>
+        </Modal>
 
-      <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 65 ,fontfamily:'Calibri'}} aria-label="simple table">
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            marginTop: "20px",
+            paddingLeft: 60,
+            paddingRight: 60,
+          }}
+        >
+          <Form.Control
+            type="text"
+            placeholder="Search..."
+            value={searchTerm}
+            onChange={handleSearch}
+            style={{ margin: "0 10px", width: "300px" }}
+          />
+          {filteredRows.length > 0 && (
+            <p style={{ margin: 0 }}>
+              Number of Members: {filteredRows.length}
+            </p>
+          )}
+          <div>
+            <Button variant="primary" onClick={handleShow}  size="sm">
+              + Add Member
+            </Button>
+            <Button
+              size="sm"
+              variant="danger"
+              onClick={handleLogout}
+              style={{ marginLeft: "10px" }}
+            >
+              Logout
+            </Button>
+          </div>
+        </div>
+        <div>
+          <div>
+            <p></p>
+          </div>{" "}
+        </div>
+      </center>
+      <Container sx={{padding:4}}>
+      
+        <TableContainer component={Paper}>
+          <Table
+            sx={{ minWidth: 100, fontfamily: "Calibri" }}
+            aria-label="simple table"
+          >
             <TableHead>
-            <TableRow sx={{color:'white'}}>
-               
-                <TableCell sx={{color:'white'}}>ID</TableCell>
-                <TableCell sx={{color:'white'}}>Name</TableCell>
-                <TableCell sx={{color:'white'}}>Phone Number</TableCell>
-                <TableCell sx={{color:'white'}}>Designation</TableCell>
-                <TableCell sx={{color:'white'}}>Location</TableCell>
-                <TableCell sx={{color:'white'}}>Action</TableCell>
+              <TableRow sx={{ color: "white" }}>
+                <TableCell sx={{ color: "white" }}>S.no</TableCell>
+                <TableCell sx={{ color: "white" }}>Shop Name</TableCell>
+                <TableCell sx={{ color: "white" }}>Owner Name</TableCell>
+                <TableCell sx={{ color: "white" }}>Phone Number</TableCell>
+                <TableCell sx={{ color: "white" }}>Address</TableCell>
+                <TableCell sx={{ color: "white" }}>Specializaion</TableCell>
+                <TableCell sx={{ color: "white" }}>Product Link</TableCell>
+                <TableCell sx={{ color: "white" }}>Location Link</TableCell>
+                {/* <TableCell sx={{ color: "white" }}>Image</TableCell> */}
+                <TableCell sx={{ color: "white" }}>Action</TableCell>
               </TableRow>
             </TableHead>
 
             <TableBody>
-            {filteredRows.map((row) => (
-                  <TableRow key={row.id} sx={{ backgroundColor: row % 2 === 0 ? '#ffffff' : '#ffefc1' ,color:'red'}}>
-                    <TableCell>{row.id}</TableCell>
-                    <TableCell>{row.name}</TableCell>
-                    <TableCell>{row.phoneNumber}</TableCell>
-                    <TableCell>{row.designation}</TableCell>
-                    <TableCell>{row.location}</TableCell>
-                    <TableCell>
+              {filteredRows.map((row) => (
+                <TableRow
+                  key={row.id}
+                  sx={{
+                    backgroundColor: row % 2 === 0 ? "#ffffff" : "#ffefc1",
+                    color: "red",
+                  }}
+                >
+                  <TableCell>{row.id}</TableCell>
+                  <TableCell>{row.shopName}</TableCell>
+                  <TableCell>{row.ownerName}</TableCell>
+                  <TableCell>{row.phoneNumber}</TableCell>
+                  <TableCell>{row.address}</TableCell>
+                  <TableCell>{row.designation}</TableCell>
+                  <TableCell>{row.productLink}</TableCell>
+                  <TableCell style={{ color: "blue" }}>
+                    <a href={row.location}>Location</a>
+                  </TableCell>
+                  {/* <TableCell>
+                    <img
+                      src={row.image}
+                      alt="Image"
+                      style={{ cursor: "pointer" }}
+                      onClick={() => {
+                        setSelectedImage(row.image);
+                        toggleModal();
+                      }}
+                    />
+                  </TableCell> */}
+                  <TableCell>
+                    <div style={{ display: "flex", gap: "10px" }}>
                       <Button
-                    variant="info"
-                    onClick={() => handleUpdate(row)}
-                    style={{ marginRight: '10px' }}
-                  >
-                    Update
-                  </Button>
-                  <Button
-                    variant="danger"
-                    onClick={() => handleDelete(row.id)}
-                  >
-                    Delete
-                  </Button>
-                    </TableCell>
-                  </TableRow>
-                    ))}
-             </TableBody>
+                        variant="info"
+                        size="sm"
+                        onClick={() => handleUpdate(row)}
+                      >
+                        Edit
+                      </Button>
+                      <Button
+                        size="sm"
+                        variant="danger"
+                        onClick={() => handleDelete(row.id)}
+                      >
+                        Delete
+                      </Button>
+                    </div>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
           </Table>
         </TableContainer>
-      <div>
-      </div>
+        <div></div>
       </Container>
-      
-      <div className="text-center p-4" style={{ backgroundColor: 'rgba(0, 0, 0, 0.05)', position: "absolute", bottom: 0, left: 0, right: 0 }}>
+
+      <div
+        className="text-center p-4"
+        style={{
+          backgroundColor: "rgba(0, 0, 0, 0.05)",
+          position: "absolute",
+          bottom: 0,
+          left: 0,
+          right: 0,
+        }}
+      >
         © 2024 Copyright
         <a className="text-reset fw-bold"> RSETI</a>
       </div>

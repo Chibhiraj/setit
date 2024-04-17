@@ -11,14 +11,6 @@ export default function Navbar() {
   
   const [openNav, setOpenNav] = useState(false);
   
- 
-  const navigate = useNavigate(); // Initialize useNavigate hook
-
-  const handleLoginButtonClick = () => {
-    // Redirect to the login page component
-    window.location.href = 'index.html';
-  };
-
   return (
     <div>
     <MDBNavbar expand='lg' light bgColor='light' style={{ padding: 5 }} className="sticky-top">

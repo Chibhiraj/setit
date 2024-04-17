@@ -1,6 +1,7 @@
 @import '~mdb-ui-kit/css/mdb.min.css';
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
 
+
 .blinking-text {
     animation: blink-animation 2s infinite;
     color: red;
@@ -11,3 +12,12 @@
     50% { opacity: 0; }
     100% { opacity: 1; }
   }
+
+
+  @keyframes blinking {
+     {
+      color: blue;
+    }
+  
+  }
+  

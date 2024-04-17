@@ -15,6 +15,7 @@ export default function CardsRow() {
     setIsOpen(!isOpen);
   };
   return (
+    
       
       <div className="row row-cols-1 row-cols-md-3 g-4" style={{padding:20}}>
       <div className="col">
@@ -77,38 +78,8 @@ export default function CardsRow() {
         View Details ->
       </Button>
 
-      <Dialog open={isOpen} onClose={toggleModal}>
-        <DialogTitle>Details </DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            <TableContainer component={Paper}>
-              <Table>
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Name</TableCell>
-                    <TableCell>Phone Number</TableCell>
-                    <TableCell>Location</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {/* Example data */}
-                  <TableRow>
-                    <TableCell style={{color:blue}}>Kumar</TableCell>
-                    <TableCell>123-456-7890</TableCell>
-                    <TableCell> <a href='https://www.google.com/maps/dir//tiruppur+rstei/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x3ba907a7a56402af:0x2deaaf8daf2a725c?sa=X&ved=1t:3061&ictx=111'>Tirppur</a></TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell>Raj</TableCell>
-                    <TableCell>456-789-0123</TableCell>
-                    <TableCell>Tirppur</TableCell>
-                  </TableRow>
-                  {/* Add more rows as needed */}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </DialogContentText>
-        </DialogContent>
-      </Dialog>
+        
+      
         </div>
       </div>
       <div className="col">
@@ -122,38 +93,6 @@ export default function CardsRow() {
         View Details ->
       </Button>
 
-      <Dialog open={isOpen} onClose={toggleModal}>
-        <DialogTitle>Details </DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            <TableContainer component={Paper}>
-              <Table>
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Name</TableCell>
-                    <TableCell>Phone Number</TableCell>
-                    <TableCell>Location</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {/* Example data */}
-                  <TableRow>
-                    <TableCell style={{color:blue}}>Kumar</TableCell>
-                    <TableCell>123-456-7890</TableCell>
-                    <TableCell> <a href='https://www.google.com/maps/dir//tiruppur+rstei/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x3ba907a7a56402af:0x2deaaf8daf2a725c?sa=X&ved=1t:3061&ictx=111'>Tirppur</a></TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell>Raj</TableCell>
-                    <TableCell>456-789-0123</TableCell>
-                    <TableCell>Tirppur</TableCell>
-                  </TableRow>
-                  {/* Add more rows as needed */}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </DialogContentText>
-        </DialogContent>
-      </Dialog>
         </div>
       </div>
       <div className="col">
@@ -222,7 +161,7 @@ export default function CardsRow() {
       </div>
       <div className="col">
         <div className="card">
-          <img src={tailor} className="card-img-top" alt="Skyscrapers"/>
+          <img src={tailor} className="card-img-top" alt="Skyscrapers" style={{maxHeight:375}}/>
           <div className="card-body">
           <h5 className="card-title">TAILORS</h5>
             <p className="card-text">
@@ -238,7 +177,7 @@ export default function CardsRow() {
       </div>
       <div className="col">
         <div className="card">
-          <img src={lamination} className="card-img-top" alt="Skyscrapers"/>
+          <img src={lamination} className="card-img-top" alt="Skyscrapers" style={{maxHeight:375}} />
           <div className="card-body">
           <h5 className="card-title">Framing</h5>
             <p className="card-text">
