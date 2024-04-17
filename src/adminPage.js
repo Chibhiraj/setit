@@ -1,18 +1,9 @@
 import { Modal, Button, Form, Table,Row,Col } from "react-bootstrap";
 import Logo from "./img/logo.jpg";
-import img from "./img/gradient-blue-abstract-background-smooth-dark-blue-with-black-vignette-studio.jpg";
-import Footer from "./footer";
 import { Navigate, useNavigate } from "react-router";
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import Container from "@mui/material/Container";
-import FormControl from "@mui/material/FormControl";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
 import Paper from "@mui/material/Paper";
-import Card from '@mui/joy/Card';
-import CardContent from '@mui/joy/CardContent';
-import Checkbox from '@mui/joy/Checkbox';
-import Divider from '@mui/joy/Divider';
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
@@ -20,12 +11,14 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import axios from "axios";
 
-function RowList() {
+const RowList=() =>{
   const [rows, setRows] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [editUserId, setEditUserId] = useState(null);
+  const [showUpdateModal, setShowUpdateModal] = useState(false);
   const [phoneNumberError, setPhoneNumberError] = useState("");
   const [formData, setFormData] = useState({
-    id: null,
+
     shopName: "",
     ownerName: "",
     phoneNumber: "",
@@ -33,9 +26,19 @@ function RowList() {
     designation: "",
     productLink: "",
     location: "",
-    image: "",
+  });
+  const [users, setUsers] = useState([]);
+  const [updatedUser, setUpdatedUser] = useState({
+    shopName: "",
+    ownerName: "",
+    phoneNumber: "",
+    address: "",
+    designation: "",
+    productLink: "",
+    location: "",
   });
 
+  const [deletedUserId, setDeletedUserId] = useState('');
   var shopName=formData.shopName;
   var ownerName=formData.ownerName;
   var phoneNumber=formData.phoneNumber;
@@ -49,16 +52,8 @@ function RowList() {
   const handleLogout = () => {
     navigate("/");
   };
-  const [selectedImage, setSelectedImage] = useState(null);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  // Function to handle image selection
-  const handleImageChange = (event) => {
-    const file = event.target.files[0]; // Get the first file selected by the user
-    // You can perform additional validation here if needed
-
-    setSelectedImage(file);
-  };
 
   // Function to toggle modal open/close
   const toggleModal = () => {
@@ -76,52 +71,103 @@ function RowList() {
   const handleDelete = (id) => {
     setRows((prevRows) => prevRows.filter((row) => row.id !== id));
     updateIds(); // Update IDs after deletion
+    axios.delete(`https://setit-backend.onrender.com/${id}`)
+    .then((response) => {
+      axios.get("https://setit-backend.onrender.com")
+      .then((response) => {
+        setUsers(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching users:", error.response.data);
+      });
+    })
+    .catch((error) => {
+      console.error("Error deleting user:", error.response.data);
+    });
+  };
+  
+  const handleEdit = (user) => {
+    setEditUserId(user._id);
+    setShowUpdateModal(true);
+    setUpdatedUser({ shopName:user.shopName,
+      ownerName:user.ownerName,
+      phoneNumber:user.phoneNumber,
+      address:user.address,
+      designation:user.designation,
+      productLink:user.productLink,
+      location:user.location });
+  };
+  const handleUpdate = () => {
+
+    axios.put(`https://setit-backend.onrender.com/${editUserId}`, updatedUser)
+    .then((response) => {
+      console.log("User updated:", response.data);
+    axios.get("https://setit-backend.onrender.com")
+    .then((response) => {
+      setUsers(response.data);
+      // setShowModal(false); // Close the edit modal after update
+      setShowUpdateModal(false); // Close the edit modal after update
+    })
+    .catch((error) => {
+      console.error("Error fetching users:", error.response.data);
+    });
+})
+      .catch((error) => {
+      console.error("Error updating user:", error.response.data);
+    });
   };
 
-  const handleUpdate = (row) => {
-    setFormData(row);
-    setShowModal(true);
-  };
-  const url =
-  "mongodb+srv://chibhiraj:kN7LG7PhHXamwECO@cluster0.o2r8wsi.mongodb.net/setit";
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // const isValidPhoneNumber = validatePhoneNumber(formData.phoneNumber);
 
-    const isValidPhoneNumber = validatePhoneNumber(formData.phoneNumber);
+    // if (!isValidPhoneNumber) {
+    //   setPhoneNumberError("Invalid phone number");
+    //   alert("Enter valid phone number");
+    //   return; 
+    // }
+    // setPhoneNumberError("");
 
-    if (!isValidPhoneNumber) {
-      setPhoneNumberError("Invalid phone number");
-      alert("Enter valid phone number");
-      return; // Don't proceed further if phone number is invalid
+    const newUser={
+      shopName:formData.shopName,
+      ownerName:formData.ownerName,
+      phoneNumber:formData.phoneNumber,
+      address:formData.address,
+      designation:formData.designation,
+      productLink:formData.productLink,
+      location:formData.location
     }
-
-    // Clear phone number error if previously set
-    setPhoneNumberError("");
-
-    if (formData.id) {
+    // axios.post('https://setit-backend.onrender.com',newUser);
+    axios.post("https://setit-backend.onrender.com", {
+      shopName:formData.shopName,
+      ownerName:formData.ownerName,
+      phoneNumber:formData.phoneNumber,
+      address:formData.address,
+      designation:formData.designation,
+      productLink:formData.productLink,
+      location:formData.location
+    })
+    .then((response) => {
+      console.log(response);
+    });
       // Update existing row
       setRows((prevRows) =>
-        prevRows.map((row) => (row.id === formData.id ? formData : row))
+        prevRows.map((row) => (row._id === formData._id ? formData : row))
       );
-    } else {
-      // Add new row with incremented ID
-      setRows((prevRows) => [
-        ...prevRows,
-        {
-          id: prevRows.length + 1,
-          ...formData,
-        },
-      ]);
-    }
-    // Close the modal
+    
     handleClose();
     updateIds(); // Update IDs after updating row
-    console.log(phoneNumber);
-    axios.post(url,{designation,location,address,ownerName,phoneNumber,productLink,shopName})
-
-    .then(()=>console.log('success'))
-    .catch((err)=> console.error(`Errr: ${err}`));
     
   };
+  useEffect(() => {
+    axios.get("https://setit-backend.onrender.com")
+      .then((response) => {
+        setUsers(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching users:", error.response.data);
+      });
+  }, [users,updatedUser,deletedUserId]);
 
   const validatePhoneNumber = (phoneNumber) => {
     // Regular expression for phone number validation
@@ -131,6 +177,7 @@ function RowList() {
 
   const handleClose = () => {
     setShowModal(false);
+    setShowUpdateModal(false);
     setFormData({
       id: null,
       shopName: "",
@@ -139,8 +186,7 @@ function RowList() {
       address: "",
       designation: "",
       productLink: "",
-      location: "",
-      image: "",
+      location: ""
     });
   };
 
@@ -160,7 +206,7 @@ function RowList() {
     setSearchTerm(e.target.value);
   };
 
-  const filteredRows = rows.filter((row) =>
+  const filteredRows = users.filter((row) =>
     Object.values(row).some((value) =>
       value.toString().toLowerCase().includes(searchTerm.toLowerCase())
     )
@@ -201,7 +247,7 @@ function RowList() {
    
         <Modal show={showModal} onHide={handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>{formData.id ? "Updating" : "Add Member"}</Modal.Title>
+            <Modal.Title>{formData._id ? "Updating" : "Add Member"}</Modal.Title>
           </Modal.Header>
           <Modal.Body >
             <Form>
@@ -320,7 +366,133 @@ function RowList() {
               Close
             </Button>
             <Button variant="primary" onClick={handleSubmit}>
-              {formData.id ? "Update" : "Add"}
+              {"Add"}
+            </Button>
+          </Modal.Footer>
+        </Modal>
+
+        <Modal show={showUpdateModal} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>{ "Updating"}</Modal.Title>
+          </Modal.Header>
+          <Modal.Body >
+            <Form>
+            <Row>
+            <Col>
+              <Form.Group controlId="shopName">
+                <Form.Label>Brand/ Shop Name</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter Shop/Brand name"
+                  name="shopName"
+                  value={updatedUser.shopName}
+                  onChange={(e) => setUpdatedUser({ ...updatedUser, shopName: e.target.value })}
+                />
+              </Form.Group>
+              </Col>
+              <Col>
+              <Form.Group controlId="ownerNname">
+                <Form.Label>Owner Name</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter Owner name"
+                  name="ownerName"
+                  value={updatedUser.ownerName}
+                  onChange={(e) => setUpdatedUser({ ...updatedUser, ownerName: e.target.value })}
+                />
+              </Form.Group>
+              </Col>
+              </Row>
+              <Form.Group controlId="phoneNumber">
+                <Form.Label>Phone Number</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter phone number"
+                  name="phoneNumber"
+                  value={updatedUser.phoneNumber}
+                  onChange={(e) => setUpdatedUser({ ...updatedUser, phoneNumber: e.target.value })}
+                />
+              </Form.Group>
+              <Form.Group controlId="address">
+                <Form.Label>Address</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Address"
+                  name="address"
+                  value={updatedUser.address}
+                  onChange={(e) => setUpdatedUser({ ...updatedUser, address: e.target.value })}
+                />
+              </Form.Group>
+              <Form.Group controlId="designation">
+                <Form.Label>Specializaion</Form.Label>
+                <Form.Select
+                  aria-label="Designation"
+                  name="designation"
+                  value={updatedUser.designation}
+                  onChange={(e) => setUpdatedUser({ ...updatedUser, designation: e.target.value })}
+                >
+                  <option value="">Select Specializaion</option>
+                  <option value="Ac repair">Ac repair</option>
+                  <option value="Beauty parlours">Beauty parlours</option>
+                  <option value="Cctv repair">Cctv repair</option>
+                  <option value="Cellphone Repair">Cellphone Repair</option>
+                  <option value="Costume designers">Costume designers</option>
+                  <option value="EMBROIDERY">EMBROIDERY</option>
+                  <option value="Framing">Framing</option>
+                  <option value="Home made masalas">Home made masalas</option>
+                  <option value="JUTE PRODUCTS">JUTE PRODUCTS</option>
+                  <option value="Lamination">Lamination</option>
+                  <option value="Mushroom producers">Mushroom producers</option>
+                  <option value="Organics">Organics</option>
+                  <option value="Paper products">Paper products</option>
+                  <option value="Photography and Videography">
+                    Photography and Videography
+                  </option>
+                  <option value="SERVICE TECHNICIANS">
+                    SERVICE TECHNICIANS
+                  </option>
+                  <option value="Soft toys">Soft toys</option>
+                  <option value="TAILORS">TAILORS</option>
+                  <option value="Wiring">Wiring</option>
+                </Form.Select>
+              </Form.Group>
+
+              <Form.Group controlId="product">
+                <Form.Label>Product Link</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter product link"
+                  name="productLink"
+                  value={updatedUser.productLink}
+                  onChange={(e) => setUpdatedUser({ ...updatedUser, productLink: e.target.value })}
+                />
+              </Form.Group>
+              <Form.Group controlId="location">
+                <Form.Label>Location</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter location"
+                  name="location"
+                  value={updatedUser.location}
+                  onChange={(e) => setUpdatedUser({ ...updatedUser, location: e.target.value })}
+                />
+              </Form.Group>
+              {/* <Form.Group controlId="image">
+                <Form.Label>Upload Image</Form.Label>
+                <Form.Control
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageChange}
+                />
+              </Form.Group> */}
+            </Form>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="danger" onClick={handleClose}>
+              Close
+            </Button>
+            <Button variant="primary" onClick={handleUpdate}>
+              Update
             </Button>
           </Modal.Footer>
         </Modal>
@@ -390,15 +562,11 @@ function RowList() {
             </TableHead>
 
             <TableBody>
-              {filteredRows.map((row) => (
+              {users.map(row => (
                 <TableRow
-                  key={row.id}
-                  sx={{
-                    backgroundColor: row % 2 === 0 ? "#ffffff" : "#ffefc1",
-                    color: "red",
-                  }}
+                  key={row._id}
                 >
-                  <TableCell>{row.id}</TableCell>
+                  <TableCell>{row._id}</TableCell>
                   <TableCell>{row.shopName}</TableCell>
                   <TableCell>{row.ownerName}</TableCell>
                   <TableCell>{row.phoneNumber}</TableCell>
@@ -408,30 +576,19 @@ function RowList() {
                   <TableCell style={{ color: "blue" }}>
                     <a href={row.location}>Location</a>
                   </TableCell>
-                  {/* <TableCell>
-                    <img
-                      src={row.image}
-                      alt="Image"
-                      style={{ cursor: "pointer" }}
-                      onClick={() => {
-                        setSelectedImage(row.image);
-                        toggleModal();
-                      }}
-                    />
-                  </TableCell> */}
                   <TableCell>
                     <div style={{ display: "flex", gap: "10px" }}>
                       <Button
                         variant="info"
                         size="sm"
-                        onClick={() => handleUpdate(row)}
+                        onClick={() => handleEdit(row)}
                       >
                         Edit
                       </Button>
                       <Button
                         size="sm"
                         variant="danger"
-                        onClick={() => handleDelete(row.id)}
+                        onClick={() => handleDelete(row._id)}
                       >
                         Delete
                       </Button>
@@ -440,7 +597,7 @@ function RowList() {
                 </TableRow>
               ))}
             </TableBody>
-          </Table>
+          </Table>  
         </TableContainer>
         <div></div>
       </Container>
