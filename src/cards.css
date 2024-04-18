@@ -1,0 +1,16 @@
+.cards-container {
+    display:flexbox;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .card-img-top{
+        max-height:450px;
+  }
+  .card {
+    background-color: #fff;
+    border-radius: 14px;
+    box-shadow: 0 4px 8px rgba(92, 174, 255, 0.1);
+    padding: 20px;
+    width:100%;
+
+  }

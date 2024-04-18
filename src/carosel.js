@@ -6,7 +6,7 @@ import img3 from './img/g1.png';
 
 export default function App() {
   return (
-    <div style={{ maxWidth:'1000px', margin: 'auto' }}>
+    <div style={{ margin: 'auto',padding:6 }}>
       <MDBCarousel showControls fade>
         <MDBCarouselItem itemId={1}>
           <img

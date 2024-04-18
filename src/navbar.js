@@ -28,7 +28,7 @@ export default function Navbar() {
         </MDBNavbarToggler>
         <MDBCollapse navbar open={openNav}>
           <MDBNavbarNav>
-            <MDBNavbarItem>
+            {/* <MDBNavbarItem>
               <MDBNavbarLink active aria-current='page' href='#'>
                 Home
               </MDBNavbarLink>
@@ -38,7 +38,7 @@ export default function Navbar() {
             </MDBNavbarItem>
             <MDBNavbarItem>
               <MDBNavbarLink href='contact-us'>Contact us</MDBNavbarLink>
-            </MDBNavbarItem>
+            </MDBNavbarItem> */}
             <MDBNavbarItem className="ms-auto">
               <div>
                 <Button href='https://docs.google.com/forms/d/e/1FAIpQLScWEie-77JOjm9ORpTUP1XfhLufQ-H3rJCZXKdos1q1FNrzVA/viewform'>

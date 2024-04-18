@@ -19,9 +19,9 @@ function Home() {
       <div>
         <p></p>
       </div>
-      <div className='logo' style={{ maxwidth: 200}}>
-        <img src={Logo} className='img-fluid' alt='...' />
-      </div>
+      <div className='logo' style={{justifyContent: 'center', display:'flex',boxSizing: 'border-box'}} >
+        <img src={Logo} style={{}}  className='img-fluid' alt='...' />
+      </div>  
       <Offers/>
       <div style={{ textAlign: 'center' }}>
       <div>
