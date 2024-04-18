@@ -119,14 +119,14 @@ const RowList=() =>{
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // const isValidPhoneNumber = validatePhoneNumber(formData.phoneNumber);
+    const isValidPhoneNumber = validatePhoneNumber(formData.phoneNumber);
 
-    // if (!isValidPhoneNumber) {
-    //   setPhoneNumberError("Invalid phone number");
-    //   alert("Enter valid phone number");
-    //   return; 
-    // }
-    // setPhoneNumberError("");
+    if (!isValidPhoneNumber) {
+      setPhoneNumberError("Invalid phone number");
+      alert("Enter valid phone number");
+      return; 
+    }
+    setPhoneNumberError("");
 
     const newUser={
       shopName:formData.shopName,
@@ -507,13 +507,13 @@ const RowList=() =>{
             paddingRight: 60,
           }}
         >
-          <Form.Control
+          {/* <Form.Control
             type="text"
             placeholder="Search..."
             value={searchTerm}
             onChange={handleSearch}
             style={{ margin: "0 10px", width: "300px" }}
-          />
+          /> */}
           {filteredRows.length > 0 && (
             <p style={{ margin: 0 }}>
               Number of Members: {filteredRows.length}
@@ -548,7 +548,7 @@ const RowList=() =>{
           >
             <TableHead>
               <TableRow sx={{ color: "white" }}>
-                <TableCell sx={{ color: "white" }}>S.no</TableCell>
+                {/* <TableCell sx={{ color: "white" }}>S.no</TableCell> */}
                 <TableCell sx={{ color: "white" }}>Shop Name</TableCell>
                 <TableCell sx={{ color: "white" }}>Owner Name</TableCell>
                 <TableCell sx={{ color: "white" }}>Phone Number</TableCell>
@@ -566,7 +566,7 @@ const RowList=() =>{
                 <TableRow
                   key={row._id}
                 >
-                  <TableCell>{row._id}</TableCell>
+                  {/* <TableCell>{row._id}</TableCell> */}
                   <TableCell>{row.shopName}</TableCell>
                   <TableCell>{row.ownerName}</TableCell>
                   <TableCell>{row.phoneNumber}</TableCell>
