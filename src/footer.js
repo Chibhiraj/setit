@@ -39,7 +39,7 @@ export default function Footer() {
       <a
         className="btn text-white btn-floating m-1"
         style={{ backgroundColor: '#ac2bac' }}
-        href="https://www.instagram.com/tiruppur_rsetiigsh=MTZ4YjJ6Ynd1eG9mdw=="
+        href="https://www.instagram.com/tiruppur_rseti?igsh=MXQ1aGQxZ2pleDFpMw=="
         role="button"
       >
         <i className="fab fa-instagram"></i>
