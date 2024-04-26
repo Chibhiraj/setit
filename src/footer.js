@@ -69,7 +69,7 @@ export default function Footer() {
                 <i className="fas fa-envelope me-3"></i>
                 cbrsetitirupur@gmail.com
      
-              <p><i className="fas fa-phone me-3"></i>0421-2256626/9489043923</p>
+              <p><i className="fas fa-phone me-3"></i>  0421-2256626/9489043923</p>
               </p>
      
     </section>
@@ -91,7 +91,7 @@ export default function Footer() {
       
 
       <div className="text-center p-4" style={{ backgroundColor: 'rgba(0, 0, 0, 0.05)' }}>
-        © 2024 Copyright
+        © 2024 Copyright 
         <a className="text-reset fw-bold">  RSETI</a>
       </div>
       

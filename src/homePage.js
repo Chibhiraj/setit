@@ -8,6 +8,7 @@ import Offers from './offers';
 import Logo from './img/logo.jpg';
 import Card from './cards.js';
 import Gallery from './gallery'
+import Events from './events';
 import Button from "react-bootstrap/Button";
 // import LoginPage from "./middleWare"
 import { Link } from 'react-router-dom';
@@ -19,15 +20,19 @@ function Home() {
       <div>
         <p></p>
       </div>
-      <div className='logo' style={{justifyContent: 'center', display:'flex',boxSizing: 'border-box'}} >
+      <div className='logo' style={{justifyContent: 'center', display:'flex',boxSizing:"content-box",paddingTop:40}} >
         <img src={Logo} style={{}}  className='img-fluid' alt='...' />
       </div>  
       <Offers/>
+        <Header />
+      <div style={{ textAlign: 'center',paddingTop:10 }}>
+        <h1>Upcoming Events</h1>
+      </div>
+        <Events />
       <div style={{ textAlign: 'center' }}>
       <div>
         <p></p>
       </div>
-        <Header />
         <div>
         <p></p>
       </div>
@@ -40,10 +45,10 @@ function Home() {
 
       <Offers/>
 
+
       <div style={{ textAlign: 'center' }}>
         <h1>Gallery</h1>
       </div>
-
       <Gallery />
 
       <div style={{ textAlign: 'center' }}>

@@ -17,6 +17,27 @@ const RowList=() =>{
   const [editUserId, setEditUserId] = useState(null);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
   const [phoneNumberError, setPhoneNumberError] = useState("");
+  // const [showEventModal, setShowEventModal] = useState(false);
+  // const [events, setEvents] = useState([]);
+  // const [eventName, setEventName] = useState('');
+
+  // const handleShowEventModal = () => setShowEventModal(true);
+  // const handleCloseEventModal = () => setShowEventModal(false);
+
+  // const handleEventNameChange = (e) => {
+  //   setEventName(e.target.value);
+  // };
+
+  // const handleAddEvent = () => {
+  //   const newEvent = {
+  //     id: events.length + 1,
+  //     name: eventName
+  //   };
+  //   setEvents([...events, newEvent]);
+  //   setEventName('');
+  //   handleCloseEventModal();
+  // };
+  
   const [formData, setFormData] = useState({
 
     shopName: "",
@@ -222,7 +243,7 @@ const RowList=() =>{
       }}
     >
       <div className="container" style={{ maxWidth: 500 }}>
-        <img src={Logo} className="img-fluid" alt="..." />
+        <img src={Logo} onClick={handleLogout} className="img-fluid" alt="..." />
       </div>
       <div>
         <p></p>
@@ -351,14 +372,6 @@ const RowList=() =>{
                   onChange={handleChange}
                 />
               </Form.Group>
-              {/* <Form.Group controlId="image">
-                <Form.Label>Upload Image</Form.Label>
-                <Form.Control
-                  type="file"
-                  accept="image/*"
-                  onChange={handleImageChange}
-                />
-              </Form.Group> */}
             </Form>
           </Modal.Body>
           <Modal.Footer>
@@ -477,14 +490,7 @@ const RowList=() =>{
                   onChange={(e) => setUpdatedUser({ ...updatedUser, location: e.target.value })}
                 />
               </Form.Group>
-              {/* <Form.Group controlId="image">
-                <Form.Label>Upload Image</Form.Label>
-                <Form.Control
-                  type="file"
-                  accept="image/*"
-                  onChange={handleImageChange}
-                />
-              </Form.Group> */}
+
             </Form>
           </Modal.Body>
           <Modal.Footer>
@@ -497,6 +503,51 @@ const RowList=() =>{
           </Modal.Footer>
         </Modal>
 
+{/* 
+        <Modal show={showEventModal} onHide={handleCloseEventModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Add Event</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group controlId="formEventName">
+              <Form.Label>Event Name</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter event name"
+                value={eventName}
+                onChange={handleEventNameChange}
+              />
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseEventModal}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleAddEvent}>
+            Add Event
+          </Button>
+        </Modal.Footer>
+      </Modal> */}
+
+      {/* <Table striped bordered hover>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Event Name</th>
+          </tr>
+        </thead>
+        <tbody>
+          {events.map(event => (
+            <tr key={event.id}>
+              <td>{event.id}</td>
+              <td>{event.name}</td>
+            </tr>
+          ))}
+        </tbody>
+      </Table> */}
+
         <div
           style={{
             display: "flex",
@@ -507,22 +558,23 @@ const RowList=() =>{
             paddingRight: 60,
           }}
         >
-          {/* <Form.Control
-            type="text"
-            placeholder="Search..."
-            value={searchTerm}
-            onChange={handleSearch}
-            style={{ margin: "0 10px", width: "300px" }}
-          /> */}
-          {filteredRows.length > 0 && (
+         
             <p style={{ margin: 0 }}>
               Number of Members: {filteredRows.length}
             </p>
-          )}
+       
           <div>
             <Button variant="primary" onClick={handleShow}  size="sm">
               + Add Member
             </Button>
+            {/* <Button
+              size="sm"
+              variant="secondary"
+              style={{ marginLeft: "10px" ,marginRight:"5px"}}
+              onClick={handleShowEventModal}
+            >
+              Add Events
+            </Button> */}
             <Button
               size="sm"
               variant="danger"

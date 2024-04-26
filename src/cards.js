@@ -39,7 +39,7 @@ export default function CardsRow() {
       
       <div className="row row-cols-1 row-cols-md-3 g-4">
       <div className="col">
-        <div className="card h-70">
+        <div className="card h-100">
           <img src={cr} className="card-img-top" alt="Hollywood Sign on The Hill"/>
           <div className="card-body">
             <h5 className="card-title">Cellphone Repair</h5>
@@ -70,22 +70,28 @@ export default function CardsRow() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                {filteredUsers.map(row => (
-                <TableRow
-                  key={row._id}
-                >
-                  <TableCell>{row.shopName}</TableCell>
-                  <TableCell>{row.ownerName}</TableCell>
-                  <TableCell>{row.phoneNumber}</TableCell>
-                  <TableCell>{row.address}</TableCell>
-                  <TableCell>{row.designation}</TableCell>
-                  <TableCell>{row.productLink}</TableCell>
-                  <TableCell style={{ color: "blue" }}>
-                    <a href={row.location}>Location</a>
-                  </TableCell>
-                  </TableRow>
-                ))}
-                </TableBody>
+        {filteredUsers.length === 0 ? (
+          <TableRow>
+            <TableCell colSpan={7} align="center">
+              Service Unavailable
+            </TableCell>
+          </TableRow>
+        ) : (
+          filteredUsers.map(row => (
+            <TableRow key={row._id}>
+              <TableCell>{row.shopName}</TableCell>
+              <TableCell>{row.ownerName}</TableCell>
+              <TableCell>{row.phoneNumber}</TableCell>
+              <TableCell>{row.address}</TableCell>
+              <TableCell>{row.designation}</TableCell>
+              <TableCell>{row.productLink}</TableCell>
+              <TableCell style={{ color: "blue" }}>
+                <a href={row.location}>Location</a>
+              </TableCell>
+            </TableRow>
+          ))
+        )}
+      </TableBody>
               </Table>
             </TableContainer>
             
@@ -141,7 +147,7 @@ export default function CardsRow() {
         </div>
       </div>
       <div className="col">
-        <div className="card">
+        <div className="card h-100">
           <img  src={bp} className="card-img-top" alt="Skyscrapers"/>
           <div className="card-body">
             <h5 className="card-title">Beauty parlours</h5>
@@ -189,7 +195,7 @@ export default function CardsRow() {
         </div>
       </div>
       <div className="col">
-        <div className="card">
+        <div className="card h-100">
           <img src={tailor} className="card-img-top" alt="Skyscrapers" />
           <div className="card-body">
           <h5 className="card-title">TAILORS</h5>
@@ -282,7 +288,7 @@ export default function CardsRow() {
         </div>
       </div>
       <div className="col">
-        <div className="card">
+        <div className="card h-100">
           <img src={org} className="card-img-top" alt="Skyscrapers"/>
           <div className="card-body">
             <h5 className="card-title">Organics</h5>
@@ -298,7 +304,7 @@ export default function CardsRow() {
         </div>
       </div>
       <div className="col">
-        <div className="card">
+        <div className="card h-100">
           <img src={masal} className="card-img-top" alt="Skyscrapers"/>
           <div className="card-body">
             <h5 className="card-title">Home made masalas</h5>
@@ -314,7 +320,7 @@ export default function CardsRow() {
         </div>
       </div>
       <div className="col">
-        <div className="card">
+        <div className="card h-100">
           <img src={toy} className="card-img-top" alt="Skyscrapers"/>
           <div className="card-body">
             <h5 className="card-title">Soft toys தயாரிப்பாளர்கள்</h5>

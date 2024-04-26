@@ -13,7 +13,7 @@ export default function Navbar() {
   
   return (
     <div>
-    <MDBNavbar expand='lg' light bgColor='light' style={{ padding: 5 }} className="sticky-top">
+    <MDBNavbar expand='lg' light bgColor='light' style={{ padding: 5 }} className="fixed-top">
       <MDBContainer fluid>
         <MDBNavbarBrand href='#'>
           <img src={logoImage} alt="Logo" style={{ maxHeight: '50px' }} />
@@ -28,17 +28,6 @@ export default function Navbar() {
         </MDBNavbarToggler>
         <MDBCollapse navbar open={openNav}>
           <MDBNavbarNav>
-            {/* <MDBNavbarItem>
-              <MDBNavbarLink active aria-current='page' href='#'>
-                Home
-              </MDBNavbarLink>
-            </MDBNavbarItem>
-            <MDBNavbarItem>
-              <MDBNavbarLink href='cards.js'>Our Services</MDBNavbarLink>
-            </MDBNavbarItem>
-            <MDBNavbarItem>
-              <MDBNavbarLink href='contact-us'>Contact us</MDBNavbarLink>
-            </MDBNavbarItem> */}
             <MDBNavbarItem className="ms-auto">
               <div>
                 <Button href='https://docs.google.com/forms/d/e/1FAIpQLScWEie-77JOjm9ORpTUP1XfhLufQ-H3rJCZXKdos1q1FNrzVA/viewform'>
