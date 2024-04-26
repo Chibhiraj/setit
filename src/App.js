@@ -4,6 +4,7 @@ import './App.css';
 import HomePage from './homePage';
 import Admin from './adminPage'
 import { Routes,Route } from 'react-router';
+// import PrivateRoute from './AuthContext';
 function App() {
   return (
     <Routes>

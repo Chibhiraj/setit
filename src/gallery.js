@@ -1,6 +1,6 @@
 import React from 'react';
 import g1 from './img/g1.png';
-import g2 from './img/g2.png';
+import g2 from './img/g8.jpg';
 import g3 from './img/g3.png';
 import g4 from './img/g4.png';
 import g5 from './img/g5.png';
