@@ -5,7 +5,7 @@ import Header from './carosel';
 import Navbar from './navbar';
 import Offers from './offers';
 // import Login from './middleWare'
-import Logo from './img/logo.jpg';
+import Logo from '../img/logo.jpg';
 import Card from './cards.js';
 import Gallery from './gallery'
 import Events from './events';

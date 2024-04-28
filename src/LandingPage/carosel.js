@@ -1,9 +1,9 @@
 import React from 'react';
 import { MDBCarousel, MDBCarouselItem } from 'mdb-react-ui-kit';
-import img1 from './img/c2.png';
-import img2 from './img/2.jpg';
-import img3 from './img/g1.png';
-import img4 from './img/g2.png';
+import img1 from '../img/c2.png';
+import img2 from '../img/2.jpg';
+import img3 from '../img/g1.png';
+import img4 from '../img/g2.png';
 
 export default function App() {
   return (

@@ -1,6 +1,6 @@
 import React from 'react';
 import { MDBIcon } from 'mdb-react-ui-kit';
-import Logo from './img/logo.jpg'
+import Logo from '../img/logo.jpg'
 
 export default function Footer() {
   return (

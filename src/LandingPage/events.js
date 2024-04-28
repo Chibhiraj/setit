@@ -9,19 +9,22 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { auto } from "@popperjs/core";
 
+import '../App.css';
+
+
 export default function Events() {
   return (
     <div>
   <Container sx={{padding:4}}>
       <TableContainer component={Paper}>
         <Table
-          sx={{ minWidth: auto, fontfamily: "Calibri" }}
+          sx={{ minWidth: auto, }}
           aria-label="simple table"
         >
           <TableHead>
-            <TableRow sx={{ color: "white" }}>
-              <TableCell sx={{ color: "white" }}>Event Name</TableCell>
-              <TableCell sx={{ color: "white" }}>Action</TableCell>
+            <TableRow >
+              <TableCell >Event Name</TableCell>
+              <TableCell >Action</TableCell>
             </TableRow>
           </TableHead>
 
@@ -29,7 +32,7 @@ export default function Events() {
               <TableRow
                 key=''
               >
-                <TableCell>Event 1</TableCell>
+                <TableCell className="blinking-event">Event 1</TableCell>
                 <TableCell>Apply</TableCell>
               </TableRow>
           </TableBody>

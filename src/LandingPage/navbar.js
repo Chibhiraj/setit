@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { MDBContainer, MDBNavbar, MDBNavbarBrand, MDBNavbarToggler, MDBNavbarNav, MDBNavbarItem, MDBNavbarLink, MDBCollapse } from 'mdb-react-ui-kit';
 import Button from "react-bootstrap/Button";
 import { MDBIcon, MDBModal, MDBModalBody } from 'mdb-react-ui-kit';
-import logoImage from './img/rseti.jpg';
+import logoImage from '../img/rseti.jpg';
 import { useNavigate } from 'react-router-dom';
 import LoginPage from './login';
 
@@ -36,6 +36,7 @@ export default function Navbar() {
                 <span style={{ margin: '0 10px' }}></span>
               </div>
             </MDBNavbarItem>
+            
                 <LoginPage/>
           </MDBNavbarNav>
         </MDBCollapse>

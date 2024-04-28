@@ -1,5 +1,5 @@
 import { Modal, Button, Form, Table,Row,Col } from "react-bootstrap";
-import Logo from "./img/logo.jpg";
+import Logo from "../img/logo.jpg";
 import { Navigate, useNavigate } from "react-router";
 import React, { useState,useEffect } from "react";
 import Container from "@mui/material/Container";
