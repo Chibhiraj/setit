@@ -24,7 +24,7 @@ export default function App() {
             <img
               src={img2}
               className='d-block w-100'
-              alt='...'
+              alt=''
               style={{ height: '300px', objectFit: 'cover' }}
             />
           </MDBCarouselItem>
