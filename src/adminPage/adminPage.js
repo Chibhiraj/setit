@@ -2,44 +2,24 @@ import { Modal, Button, Form, Table,Row,Col } from "react-bootstrap";
 import Logo from "../img/logo.jpg";
 import { Navigate, useNavigate } from "react-router";
 import React, { useState,useEffect } from "react";
-import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
+import Container from "@mui/material/Container";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import axios from "axios";
-
+import EventsTable from "./eventsTable";
 const RowList=() =>{
+  
   const [rows, setRows] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [editUserId, setEditUserId] = useState(null);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
   const [phoneNumberError, setPhoneNumberError] = useState("");
-  // const [showEventModal, setShowEventModal] = useState(false);
-  // const [events, setEvents] = useState([]);
-  // const [eventName, setEventName] = useState('');
-
-  // const handleShowEventModal = () => setShowEventModal(true);
-  // const handleCloseEventModal = () => setShowEventModal(false);
-
-  // const handleEventNameChange = (e) => {
-  //   setEventName(e.target.value);
-  // };
-
-  // const handleAddEvent = () => {
-  //   const newEvent = {
-  //     id: events.length + 1,
-  //     name: eventName
-  //   };
-  //   setEvents([...events, newEvent]);
-  //   setEventName('');
-  //   handleCloseEventModal();
-  // };
   
   const [formData, setFormData] = useState({
-
     shopName: "",
     ownerName: "",
     phoneNumber: "",
@@ -255,6 +235,7 @@ const RowList=() =>{
             justifyContent: "center",
             alignItems: "center",
             flexDirection: "column",
+            color:"blue"
           }}
         >
           <h3
@@ -265,7 +246,7 @@ const RowList=() =>{
         </div>
 
     
-   
+            
         <Modal show={showModal} onHide={handleClose}>
           <Modal.Header closeButton>
             <Modal.Title>{formData._id ? "Updating" : "Add Member"}</Modal.Title>
@@ -503,51 +484,9 @@ const RowList=() =>{
           </Modal.Footer>
         </Modal>
 
-{/* 
-        <Modal show={showEventModal} onHide={handleCloseEventModal}>
-        <Modal.Header closeButton>
-          <Modal.Title>Add Event</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form>
-            <Form.Group controlId="formEventName">
-              <Form.Label>Event Name</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter event name"
-                value={eventName}
-                onChange={handleEventNameChange}
-              />
-            </Form.Group>
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseEventModal}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleAddEvent}>
-            Add Event
-          </Button>
-        </Modal.Footer>
-      </Modal> */}
+          <EventsTable/>
 
-      {/* <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Event Name</th>
-          </tr>
-        </thead>
-        <tbody>
-          {events.map(event => (
-            <tr key={event.id}>
-              <td>{event.id}</td>
-              <td>{event.name}</td>
-            </tr>
-          ))}
-        </tbody>
-      </Table> */}
-
+      
         <div
           style={{
             display: "flex",
@@ -567,14 +506,6 @@ const RowList=() =>{
             <Button variant="primary" onClick={handleShow}  size="sm">
               + Add Member
             </Button>
-            {/* <Button
-              size="sm"
-              variant="secondary"
-              style={{ marginLeft: "10px" ,marginRight:"5px"}}
-              onClick={handleShowEventModal}
-            >
-              Add Events
-            </Button> */}
             <Button
               size="sm"
               variant="danger"

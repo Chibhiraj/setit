@@ -8,11 +8,22 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { auto } from "@popperjs/core";
-
+import axios from "axios";
 import '../App.css';
 
 
 export default function Events() {
+  const [events, setEvents] = useState([]);
+
+  useEffect(() => {
+    axios.get("https://setit-events.onrender.com")
+      .then((response) => {
+        setEvents(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching events:", error.response.data);
+      });
+  }, []);
   return (
     <div>
   <Container sx={{padding:4}}>
@@ -29,12 +40,12 @@ export default function Events() {
           </TableHead>
 
           <TableBody>
-              <TableRow
-                key=''
-              >
-                <TableCell className="blinking-event">Event 1</TableCell>
-                <TableCell>Apply</TableCell>
-              </TableRow>
+          {events.map(event => (
+            < TableRow  key={event._id}>
+              <TableCell>{event.eventName}</TableCell>
+              <TableCell>{event.eventLink}</TableCell>
+          </TableRow>
+        ))}
           </TableBody>
         </Table>  
       </TableContainer>
