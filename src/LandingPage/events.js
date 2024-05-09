@@ -23,7 +23,7 @@ export default function Events() {
       .catch((error) => {
         console.error("Error fetching events:", error.response.data);
       });
-  }, []);
+  }, [setEvents]);
   return (
     <div>
   <Container sx={{padding:4}}>
