@@ -35,7 +35,7 @@ export default function Events() {
           <TableHead>
             <TableRow >
               <TableCell >Event Name</TableCell>
-              <TableCell >Action</TableCell>
+              <TableCell >Apply Link</TableCell>
             </TableRow>
           </TableHead>
 
