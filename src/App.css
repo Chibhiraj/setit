@@ -17,8 +17,8 @@ body {
 }
 
 .blinking-event {
-  animation: blink-animation 1s infinite ;
-  color: rgb(0, 114, 166);  
+  animation: blink-animation 2s infinite ;
+  color: rgb(255, 249, 73);  
   
 }
 

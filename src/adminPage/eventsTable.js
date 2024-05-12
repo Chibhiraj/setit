@@ -151,8 +151,6 @@ const  EventsTable=() =>{
   return (
     <div>
       <center>
-
-
         <Modal show={showModal} onHide={handleClose}>
           <Modal.Header closeButton>
             <Modal.Title>
@@ -214,7 +212,12 @@ const  EventsTable=() =>{
                       placeholder="Enter Event name"
                       name="eventName"
                       value={updatedUser.eventName}
-                      onChange={(e) => setUpdatedUser({ ...updatedUser, eventName: e.target.value })}
+                      onChange={(e) =>
+                        setUpdatedUser({
+                          ...updatedUser,
+                          eventName: e.target.value,
+                        })
+                      }
                     />
                   </Form.Group>
                 </Col>
@@ -226,7 +229,12 @@ const  EventsTable=() =>{
                       placeholder="Enter Event Link"
                       name="eventLink"
                       value={updatedUser.eventLink}
-                      onChange={(e) => setUpdatedUser({ ...updatedUser, eventLink: e.target.value })}
+                      onChange={(e) =>
+                        setUpdatedUser({
+                          ...updatedUser,
+                          eventLink: e.target.value,
+                        })
+                      }
                     />
                   </Form.Group>
                 </Col>
@@ -244,17 +252,18 @@ const  EventsTable=() =>{
         </Modal>
 
         <div
+          style={{
+            display: "flex",
+            justifyContent: "flex-end",
+            marginTop: "20px",
+            paddingRight: 60,
+          }}
         >
           <div>
             <Button variant="primary" onClick={handleShow} size="sm">
-              Add Events
+              + Add Event
             </Button>
           </div>
-        </div>
-        <div>
-          <div>
-            <p></p>
-          </div>{" "}
         </div>
       </center>
       <Container sx={{ padding: 4 }}>

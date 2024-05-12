@@ -25,8 +25,8 @@ export default function Events() {
       });
   }, [setEvents]);
   return (
-    <div>
-  <Container sx={{padding:4}}>
+    <div >
+  <Container sx={{padding:4}} >
       <TableContainer component={Paper}>
         <Table
           sx={{ minWidth: auto, }}
@@ -41,9 +41,9 @@ export default function Events() {
 
           <TableBody>
           {events.map(event => (
-            < TableRow  key={event._id}>
-              <TableCell>{event.eventName}</TableCell>
-              <TableCell>{event.eventLink}</TableCell>
+            < TableRow  className="blinking-event" key={event._id}>
+              <TableCell >{event.eventName}</TableCell>
+              <TableCell> <a href="">{event.eventLink}</a></TableCell>
           </TableRow>
         ))}
           </TableBody>

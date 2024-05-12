@@ -238,7 +238,7 @@ const RowList = () => {
           >
             Welcome to Admin Panel
           </h3>
-          <div style={{ marginLeft: "auto" }}>
+          <div>
             <Button
               size="sm"
               variant="danger"
@@ -543,7 +543,7 @@ const RowList = () => {
           </div>{" "}
         </div>
       </center>
-      <Container sx={{ padding: 4 }}>
+      <Container sx={{ padding: 4 ,paddingBottom:10}}>
         <TableContainer component={Paper}>
           <Table
             sx={{ minWidth: 100, fontfamily: "Calibri" }}
