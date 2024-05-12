@@ -266,7 +266,10 @@ const  EventsTable=() =>{
           </div>
         </div>
       </center>
-      <Container sx={{ padding: 4 }}>
+       
+      
+    
+        <Container sx={{ padding: 4 }}>
         <TableContainer component={Paper}>
           <Table
             sx={{ minWidth: 100, fontfamily: "Calibri" }}
@@ -282,7 +285,14 @@ const  EventsTable=() =>{
             </TableHead>
 
             <TableBody>
-              {users.map((row) => (
+            {users.length===0 ?(
+              <TableRow>
+                <TableCell colSpan={7} align="center">
+                  No current events
+                </TableCell>
+              </TableRow>
+            ) :(
+              users.map((row) => (
                 <TableRow key={row._id}>
                   {/* <TableCell>{row._id}</TableCell> */}
                   <TableCell>{row.eventName}</TableCell>
@@ -306,12 +316,13 @@ const  EventsTable=() =>{
                     </div>
                   </TableCell>
                 </TableRow>
-              ))}
+              ))
+            )}
             </TableBody>
           </Table>
         </TableContainer>
         <div></div>
-      </Container>
+      </Container> 
     </div>
   );
 }

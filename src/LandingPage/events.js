@@ -40,12 +40,18 @@ export default function Events() {
           </TableHead>
 
           <TableBody>
-          {events.map(event => (
+          {events.length===0 ?(
+              <TableRow>
+                <TableCell colSpan={7} align="center">
+                  No current events
+                </TableCell>
+              </TableRow>
+            ) :(events.map(event => (
             < TableRow  className="blinking-event" key={event._id}>
               <TableCell >{event.eventName}</TableCell>
               <TableCell> <a href="">{event.eventLink}</a></TableCell>
           </TableRow>
-        ))}
+        )))}
           </TableBody>
         </Table>  
       </TableContainer>
