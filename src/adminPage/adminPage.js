@@ -1,7 +1,7 @@
-import { Modal, Button, Form, Table,Row,Col } from "react-bootstrap";
+import { Modal, Button, Form, Table, Row, Col } from "react-bootstrap";
 import Logo from "../img/logo.jpg";
 import { Navigate, useNavigate } from "react-router";
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Paper from "@mui/material/Paper";
 import Container from "@mui/material/Container";
 import TableBody from "@mui/material/TableBody";
@@ -11,14 +11,13 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import axios from "axios";
 import EventsTable from "./eventsTable";
-const RowList=() =>{
-  
+const RowList = () => {
   const [rows, setRows] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [editUserId, setEditUserId] = useState(null);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
   const [phoneNumberError, setPhoneNumberError] = useState("");
-  
+
   const [formData, setFormData] = useState({
     shopName: "",
     ownerName: "",
@@ -39,14 +38,7 @@ const RowList=() =>{
     location: "",
   });
 
-  const [deletedUserId, setDeletedUserId] = useState('');
-  var shopName=formData.shopName;
-  var ownerName=formData.ownerName;
-  var phoneNumber=formData.phoneNumber;
-  var address=formData.address;
-  var designation=formData.designation;
-  var productLink=formData.productLink;
-  var location=formData.location;
+  const [deletedUserId, setDeletedUserId] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
 
   const navigate = useNavigate();
@@ -69,54 +61,16 @@ const RowList=() =>{
     }));
   };
 
-  const handleDelete = (id) => {
-    setRows((prevRows) => prevRows.filter((row) => row.id !== id));
-    updateIds(); // Update IDs after deletion
-    axios.delete(`https://setit-backend.onrender.com/${id}`)
-    .then((response) => {
-      axios.get("https://setit-backend.onrender.com")
+  useEffect(() => {
+    axios
+      .get("https://setit-backend.onrender.com")
       .then((response) => {
         setUsers(response.data);
       })
       .catch((error) => {
         console.error("Error fetching users:", error.response.data);
       });
-    })
-    .catch((error) => {
-      console.error("Error deleting user:", error.response.data);
-    });
-  };
-  
-  const handleEdit = (user) => {
-    setEditUserId(user._id);
-    setShowUpdateModal(true);
-    setUpdatedUser({ shopName:user.shopName,
-      ownerName:user.ownerName,
-      phoneNumber:user.phoneNumber,
-      address:user.address,
-      designation:user.designation,
-      productLink:user.productLink,
-      location:user.location });
-  };
-  const handleUpdate = () => {
-
-    axios.put(`https://setit-backend.onrender.com/${editUserId}`, updatedUser)
-    .then((response) => {
-      console.log("User updated:", response.data);
-    axios.get("https://setit-backend.onrender.com")
-    .then((response) => {
-      setUsers(response.data);
-      // setShowModal(false); // Close the edit modal after update
-      setShowUpdateModal(false); // Close the edit modal after update
-    })
-    .catch((error) => {
-      console.error("Error fetching users:", error.response.data);
-    });
-})
-      .catch((error) => {
-      console.error("Error updating user:", error.response.data);
-    });
-  };
+  }, [users, updatedUser, deletedUserId]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -125,50 +79,86 @@ const RowList=() =>{
     if (!isValidPhoneNumber) {
       setPhoneNumberError("Invalid phone number");
       alert("Enter valid phone number");
-      return; 
+      return;
     }
     setPhoneNumberError("");
 
-    const newUser={
-      shopName:formData.shopName,
-      ownerName:formData.ownerName,
-      phoneNumber:formData.phoneNumber,
-      address:formData.address,
-      designation:formData.designation,
-      productLink:formData.productLink,
-      location:formData.location
-    }
-    // axios.post('https://setit-backend.onrender.com',newUser);
-    axios.post("https://setit-backend.onrender.com", {
-      shopName:formData.shopName,
-      ownerName:formData.ownerName,
-      phoneNumber:formData.phoneNumber,
-      address:formData.address,
-      designation:formData.designation,
-      productLink:formData.productLink,
-      location:formData.location
-    })
-    .then((response) => {
-      console.log(response);
-    });
-      // Update existing row
-      setRows((prevRows) =>
-        prevRows.map((row) => (row._id === formData._id ? formData : row))
-      );
-    
+    axios
+      .post("https://setit-backend.onrender.com", {
+        shopName: formData.shopName,
+        ownerName: formData.ownerName,
+        phoneNumber: formData.phoneNumber,
+        address: formData.address,
+        designation: formData.designation,
+        productLink: formData.productLink,
+        location: formData.location,
+      })
+      .then((response) => {
+        console.log(response);
+      });
+    // Update existing row
+    setRows((prevRows) =>
+      prevRows.map((row) => (row._id === formData._id ? formData : row))
+    );
+
     handleClose();
     updateIds(); // Update IDs after updating row
-    
   };
-  useEffect(() => {
-    axios.get("https://setit-backend.onrender.com")
+
+  const handleEdit = (user) => {
+    setEditUserId(user._id);
+    setShowUpdateModal(true);
+    setUpdatedUser({
+      shopName: user.shopName,
+      ownerName: user.ownerName,
+      phoneNumber: user.phoneNumber,
+      address: user.address,
+      designation: user.designation,
+      productLink: user.productLink,
+      location: user.location,
+    });
+  };
+  
+  const handleUpdate = () => {
+    axios
+      .put(`https://setit-backend.onrender.com/${editUserId}`, updatedUser)
       .then((response) => {
-        setUsers(response.data);
+        console.log("User updated:", response.data);
+        axios
+          .get("https://setit-backend.onrender.com")
+          .then((response) => {
+            setUsers(response.data);
+            // setShowModal(false); // Close the edit modal after update
+            setShowUpdateModal(false); // Close the edit modal after update
+          })
+          .catch((error) => {
+            console.error("Error fetching users:", error.response.data);
+          });
       })
       .catch((error) => {
-        console.error("Error fetching users:", error.response.data);
+        console.error("Error updating user:", error.response.data);
       });
-  }, [users,updatedUser,deletedUserId]);
+  };
+
+  const handleDelete = (id) => {
+    setRows((prevRows) => prevRows.filter((row) => row.id !== id));
+    updateIds(); // Update IDs after deletion
+    axios
+      .delete(`https://setit-backend.onrender.com/${id}`)
+      .then((response) => {
+        axios
+          .get("https://setit-backend.onrender.com")
+          .then((response) => {
+            setUsers(response.data);
+          })
+          .catch((error) => {
+            console.error("Error fetching users:", error.response.data);
+          });
+      })
+      .catch((error) => {
+        console.error("Error deleting user:", error.response.data);
+      });
+  };
 
   const validatePhoneNumber = (phoneNumber) => {
     // Regular expression for phone number validation
@@ -187,7 +177,7 @@ const RowList=() =>{
       address: "",
       designation: "",
       productLink: "",
-      location: ""
+      location: "",
     });
   };
 
@@ -223,7 +213,12 @@ const RowList=() =>{
       }}
     >
       <div className="container" style={{ maxWidth: 500 }}>
-        <img src={Logo} onClick={handleLogout} className="img-fluid" alt="..." />
+        <img
+          src={Logo}
+          onClick={handleLogout}
+          className="img-fluid"
+          alt="..."
+        />
       </div>
       <div>
         <p></p>
@@ -235,7 +230,7 @@ const RowList=() =>{
             justifyContent: "center",
             alignItems: "center",
             flexDirection: "column",
-            color:"blue"
+            color: "blue",
           }}
         >
           <h3
@@ -243,41 +238,51 @@ const RowList=() =>{
           >
             Welcome to Admin Panel
           </h3>
+          <div style={{ marginLeft: "auto" }}>
+            <Button
+              size="sm"
+              variant="danger"
+              onClick={handleLogout}
+              style={{ marginLeft: "10px" }}
+            >
+              Logout
+            </Button>
+          </div>
         </div>
 
-    
-            
         <Modal show={showModal} onHide={handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>{formData._id ? "Updating" : "Add Member"}</Modal.Title>
+            <Modal.Title>
+              {formData._id ? "Updating" : "Add Member"}
+            </Modal.Title>
           </Modal.Header>
-          <Modal.Body >
+          <Modal.Body>
             <Form>
-            <Row>
-            <Col>
-              <Form.Group controlId="shopName">
-                <Form.Label>Brand/ Shop Name</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Enter Shop/Brand name"
-                  name="shopName"
-                  value={formData.shopName}
-                  onChange={handleChange}
-                />
-              </Form.Group>
-              </Col>
-              <Col>
-              <Form.Group controlId="ownerNname">
-                <Form.Label>Owner Name</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Enter Owner name"
-                  name="ownerName"
-                  value={formData.ownerName}
-                  onChange={handleChange}
-                />
-              </Form.Group>
-              </Col>
+              <Row>
+                <Col>
+                  <Form.Group controlId="shopName">
+                    <Form.Label>Brand/ Shop Name</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Enter Shop/Brand name"
+                      name="shopName"
+                      value={formData.shopName}
+                      onChange={handleChange}
+                    />
+                  </Form.Group>
+                </Col>
+                <Col>
+                  <Form.Group controlId="ownerNname">
+                    <Form.Label>Owner Name</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Enter Owner name"
+                      name="ownerName"
+                      value={formData.ownerName}
+                      onChange={handleChange}
+                    />
+                  </Form.Group>
+                </Col>
               </Row>
               <Form.Group controlId="phoneNumber">
                 <Form.Label>Phone Number</Form.Label>
@@ -367,35 +372,45 @@ const RowList=() =>{
 
         <Modal show={showUpdateModal} onHide={handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>{ "Updating"}</Modal.Title>
+            <Modal.Title>{"Updating"}</Modal.Title>
           </Modal.Header>
-          <Modal.Body >
+          <Modal.Body>
             <Form>
-            <Row>
-            <Col>
-              <Form.Group controlId="shopName">
-                <Form.Label>Brand/ Shop Name</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Enter Shop/Brand name"
-                  name="shopName"
-                  value={updatedUser.shopName}
-                  onChange={(e) => setUpdatedUser({ ...updatedUser, shopName: e.target.value })}
-                />
-              </Form.Group>
-              </Col>
-              <Col>
-              <Form.Group controlId="ownerNname">
-                <Form.Label>Owner Name</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Enter Owner name"
-                  name="ownerName"
-                  value={updatedUser.ownerName}
-                  onChange={(e) => setUpdatedUser({ ...updatedUser, ownerName: e.target.value })}
-                />
-              </Form.Group>
-              </Col>
+              <Row>
+                <Col>
+                  <Form.Group controlId="shopName">
+                    <Form.Label>Brand/ Shop Name</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Enter Shop/Brand name"
+                      name="shopName"
+                      value={updatedUser.shopName}
+                      onChange={(e) =>
+                        setUpdatedUser({
+                          ...updatedUser,
+                          shopName: e.target.value,
+                        })
+                      }
+                    />
+                  </Form.Group>
+                </Col>
+                <Col>
+                  <Form.Group controlId="ownerNname">
+                    <Form.Label>Owner Name</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Enter Owner name"
+                      name="ownerName"
+                      value={updatedUser.ownerName}
+                      onChange={(e) =>
+                        setUpdatedUser({
+                          ...updatedUser,
+                          ownerName: e.target.value,
+                        })
+                      }
+                    />
+                  </Form.Group>
+                </Col>
               </Row>
               <Form.Group controlId="phoneNumber">
                 <Form.Label>Phone Number</Form.Label>
@@ -404,7 +419,12 @@ const RowList=() =>{
                   placeholder="Enter phone number"
                   name="phoneNumber"
                   value={updatedUser.phoneNumber}
-                  onChange={(e) => setUpdatedUser({ ...updatedUser, phoneNumber: e.target.value })}
+                  onChange={(e) =>
+                    setUpdatedUser({
+                      ...updatedUser,
+                      phoneNumber: e.target.value,
+                    })
+                  }
                 />
               </Form.Group>
               <Form.Group controlId="address">
@@ -414,7 +434,9 @@ const RowList=() =>{
                   placeholder="Address"
                   name="address"
                   value={updatedUser.address}
-                  onChange={(e) => setUpdatedUser({ ...updatedUser, address: e.target.value })}
+                  onChange={(e) =>
+                    setUpdatedUser({ ...updatedUser, address: e.target.value })
+                  }
                 />
               </Form.Group>
               <Form.Group controlId="designation">
@@ -423,7 +445,12 @@ const RowList=() =>{
                   aria-label="Designation"
                   name="designation"
                   value={updatedUser.designation}
-                  onChange={(e) => setUpdatedUser({ ...updatedUser, designation: e.target.value })}
+                  onChange={(e) =>
+                    setUpdatedUser({
+                      ...updatedUser,
+                      designation: e.target.value,
+                    })
+                  }
                 >
                   <option value="">Select Specializaion</option>
                   <option value="Ac repair">Ac repair</option>
@@ -458,7 +485,12 @@ const RowList=() =>{
                   placeholder="Enter product link"
                   name="productLink"
                   value={updatedUser.productLink}
-                  onChange={(e) => setUpdatedUser({ ...updatedUser, productLink: e.target.value })}
+                  onChange={(e) =>
+                    setUpdatedUser({
+                      ...updatedUser,
+                      productLink: e.target.value,
+                    })
+                  }
                 />
               </Form.Group>
               <Form.Group controlId="location">
@@ -468,10 +500,11 @@ const RowList=() =>{
                   placeholder="Enter location"
                   name="location"
                   value={updatedUser.location}
-                  onChange={(e) => setUpdatedUser({ ...updatedUser, location: e.target.value })}
+                  onChange={(e) =>
+                    setUpdatedUser({ ...updatedUser, location: e.target.value })
+                  }
                 />
               </Form.Group>
-
             </Form>
           </Modal.Body>
           <Modal.Footer>
@@ -484,9 +517,8 @@ const RowList=() =>{
           </Modal.Footer>
         </Modal>
 
-          <EventsTable/>
+        <EventsTable />
 
-      
         <div
           style={{
             display: "flex",
@@ -497,22 +529,11 @@ const RowList=() =>{
             paddingRight: 60,
           }}
         >
-         
-            <p style={{ margin: 0 }}>
-              Number of Members: {filteredRows.length}
-            </p>
-       
+          <p style={{ margin: 0 }}>Number of Members: {filteredRows.length}</p>
+
           <div>
-            <Button variant="primary" onClick={handleShow}  size="sm">
+            <Button variant="primary" onClick={handleShow} size="sm">
               + Add Member
-            </Button>
-            <Button
-              size="sm"
-              variant="danger"
-              onClick={handleLogout}
-              style={{ marginLeft: "10px" }}
-            >
-              Logout
             </Button>
           </div>
         </div>
@@ -522,8 +543,7 @@ const RowList=() =>{
           </div>{" "}
         </div>
       </center>
-      <Container sx={{padding:4}}>
-      
+      <Container sx={{ padding: 4 }}>
         <TableContainer component={Paper}>
           <Table
             sx={{ minWidth: 100, fontfamily: "Calibri" }}
@@ -545,10 +565,8 @@ const RowList=() =>{
             </TableHead>
 
             <TableBody>
-              {users.map(row => (
-                <TableRow
-                  key={row._id}
-                >
+              {users.map((row) => (
+                <TableRow key={row._id}>
                   {/* <TableCell>{row._id}</TableCell> */}
                   <TableCell>{row.shopName}</TableCell>
                   <TableCell>{row.ownerName}</TableCell>
@@ -580,7 +598,7 @@ const RowList=() =>{
                 </TableRow>
               ))}
             </TableBody>
-          </Table>  
+          </Table>
         </TableContainer>
         <div></div>
       </Container>
@@ -600,6 +618,6 @@ const RowList=() =>{
       </div>
     </div>
   );
-}
+};
 
 export default RowList;

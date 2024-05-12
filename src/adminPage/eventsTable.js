@@ -1,142 +1,310 @@
-import React, { useState,useEffect } from "react";
 import { Modal, Button, Form, Table,Row,Col } from "react-bootstrap";
+import { Navigate, useNavigate } from "react-router";
+import React, { useState,useEffect } from "react";
 import Paper from "@mui/material/Paper";
 import Container from "@mui/material/Container";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
 import axios from "axios";
 
-const EventsTable = () => {
-  const [showEventModal, setShowEventModal] = useState(false);
-  const [eventData, setEventData] = useState({
-    eventName:"",
-    eventLink:""
+const  EventsTable=() =>{
+
+  const [rows, setRows] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [editUserId, setEditUserId] = useState(null);
+  const [showUpdateModal, setShowUpdateModal] = useState(false);
+  
+  const [formData, setFormData] = useState({
+    eventName:'',
+    eventLink:''
+  });
+  const [users, setUsers] = useState([]);
+  const [updatedUser, setUpdatedUser] = useState({
+    eventName:'',
+    eventLink:'',
   });
   
-  const [events, setEvents] = useState([]);
-  const handleShowEventModal = () => setShowEventModal(true);
-  const handleCloseEventModal = () => setShowEventModal(false);
-
+  const [deletedUserId, setDeletedUserId] = useState('');
+  
+  
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  
+  // Function to toggle modal open/close
+  const toggleModal = () => {
+    setIsModalOpen(!isModalOpen);
+  };
+  
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setEventData((prevData) => ({
+    setFormData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
   };
-
+  
+  const handleEdit = (user) => {
+    setEditUserId(user._id);
+    setShowUpdateModal(true);
+    setUpdatedUser({ 
+      eventName:user.eventName,
+      eventLink:user.eventLink
+    });
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post("https://setit-events.onrender.com", {
-      eventName:eventData.eventName,
-      eventLink:eventData.eventLink
+
+    axios.post("https://setit-events.onrender.com/", {
+      eventName:formData.eventName,
+      eventLink:formData.eventLink,
     })
     .then((response) => {
       console.log(response);
+      // console.log("success");
     });
+    // Update existing row
+    setRows((prevRows) =>
+    prevRows.map((row) => (row._id === formData._id ? formData : row))
+    );
+    
     handleClose();
+    updateIds(); // Update IDs after updating row
+    
   };
 
+  
   useEffect(() => {
-    axios.get("https://setit-events.onrender.com")
+    axios.get("https://setit-events.onrender.com/")
+    .then((response) => {
+      setUsers(response.data);
+    })
+    .catch((error) => {
+      console.error("Error fetching users:", error.response.data);
+    });
+  }, [users,updatedUser,deletedUserId]);
+  
+  
+  const handleUpdate = () => {
+    axios.put(`https://setit-events.onrender.com/${editUserId}`, updatedUser)
+    .then((response) => {
+      
+      console.log("User updated:", response.data);
+      axios.get("https://setit-events.onrender.com/")
       .then((response) => {
-        setEvents(response.data);
+        setUsers(response.data);
+        // setShowModal(false); // Close the edit modal after update
+        setShowUpdateModal(false); // Close the edit modal after update
+      })
+      .catch((error) => {
+        console.error("Error fetching users:", error.response.data);
+      });
+    })
+    .catch((error) => {
+
+      console.error("Error updating user:", error.response.data);
+    });
+  };
+  
+  const handleDelete = (id) => {
+    setRows((prevRows) => prevRows.filter((row) => row.id !== id));
+    updateIds(); // Update IDs after deletion
+    axios.delete(`https://setit-events.onrender.com/${id}`)
+    .then((response) => {
+      axios.get("https://setit-events.onrender.com/")
+      .then((response) => {
+        setUsers(response.data);
       })
       .catch((error) => {
         console.error("Error fetching events:", error.response.data);
       });
-  }, [eventData]);
-
+    })
+    .catch((error) => {
+      console.error("Error deleting event:", error.response.data);
+    });
+  };
+  
   const handleClose = () => {
-    setShowEventModal(false);
-    // ShowUpdateModal(false);
-    setEventData({
+    setShowModal(false);
+    setShowUpdateModal(false);
+    setFormData({
+      id:null,
       eventName:"",
       eventLink:""
     });
   };
+
+  const handleShow = () => setShowModal(true);
+
+  const updateIds = () => {
+    // Update IDs to ensure they are sequential
+    setRows((prevRows) =>
+      prevRows.map((row, index) => ({
+        ...row,
+        id: index + 1,
+      }))
+    );
+  };
+
+
   return (
-    
     <div>
-    <div style={{paddingBottom:"10px"}}>
-
-    <Button
-      size="sm"
-      variant="success"
-      style={{ marginLeft: "10px" ,marginRight:"5px",paddingBottom:"10px"}}
-      onClick={handleShowEventModal}
-    >
-      Add Events
-    </Button>
-  </div>
-    <Container sx={{padding:2}}>
-
-    <TableContainer component={Paper}>
-
-     <Table striped bordered hover 
-          sx={{ minWidth: 10, fontfamily: "Calibri" }}
-          aria-label="simple table"
-     >
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Event Name</th>
-          <th>Event Link</th>
-        </tr>
-      </thead>
-      <tbody>
-        {events.map(event => (
-          <tr key={event._id}>
-            <td>{event.id}</td>
-            <td>{event.eventName}</td>
-            <td>{event.eventLink}</td>
-          </tr>
-        ))}
-      </tbody>
-    </Table>
-
-    </TableContainer>
-    </Container>
+      <center>
 
 
-    <Modal show={showEventModal} onHide={handleCloseEventModal}>
-    <Modal.Header closeButton>
-      <Modal.Title>Add Event</Modal.Title>
-    </Modal.Header>
-    <Modal.Body>
-      <Form>
-        <Form.Group controlId="formEventName">
-          <Form.Label>Event Name</Form.Label>
-          <Form.Control
-            type="text"
-            name="eventName"
-            placeholder="Enter event name"
-            value={eventData.eventName}
-            onChange={handleChange}
-          />
-        </Form.Group>
-        <Form.Group controlId="formEventLink">
-          <Form.Label>Event Link</Form.Label>
-          <Form.Control
-            type="text"
-            name="eventLink"
-            placeholder="Enter event link name"
-            value={eventData.eventLink}
-            onChange={handleChange}
-          />
-        </Form.Group>
-      </Form>
-    </Modal.Body>
-    <Modal.Footer>
-      <Button variant="secondary" onClick={handleCloseEventModal}>
-        Close
-      </Button>
-      <Button variant="primary" onClick={handleSubmit}>
-        Add Event
-      </Button>
-    </Modal.Footer>
-  </Modal>
+        <Modal show={showModal} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>
+              {formData._id ? "Updating" : "Add Member"}
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form>
+              <Row>
+                <Col>
+                  <Form.Group controlId="eventName">
+                    <Form.Label>Enter Event Name</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Enter Event name"
+                      name="eventName"
+                      value={formData.eventName}
+                      onChange={handleChange}
+                    />
+                  </Form.Group>
+                </Col>
+                <Col>
+                  <Form.Group controlId="eventLink">
+                    <Form.Label>Event Link</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Enter Event Link"
+                      name="eventLink"
+                      value={formData.eventLink}
+                      onChange={handleChange}
+                    />
+                  </Form.Group>
+                </Col>
+              </Row>
+            </Form>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="danger" onClick={handleClose}>
+              Close
+            </Button>
+            <Button variant="primary" onClick={handleSubmit}>
+              Add
+            </Button>
+          </Modal.Footer>
+        </Modal>
+
+        <Modal show={showUpdateModal} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>{"Updating"}</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form>
+              <Row>
+                <Col>
+                  <Form.Group controlId="eventName">
+                    <Form.Label>Enter Event Name</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Enter Event name"
+                      name="eventName"
+                      value={updatedUser.eventName}
+                      onChange={(e) => setUpdatedUser({ ...updatedUser, eventName: e.target.value })}
+                    />
+                  </Form.Group>
+                </Col>
+                <Col>
+                  <Form.Group controlId="eventLink">
+                    <Form.Label>Event Link</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Enter Event Link"
+                      name="eventLink"
+                      value={updatedUser.eventLink}
+                      onChange={(e) => setUpdatedUser({ ...updatedUser, eventLink: e.target.value })}
+                    />
+                  </Form.Group>
+                </Col>
+              </Row>
+            </Form>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="danger" onClick={handleClose}>
+              Close
+            </Button>
+            <Button variant="primary" onClick={handleUpdate}>
+              Update
+            </Button>
+          </Modal.Footer>
+        </Modal>
+
+        <div
+        >
+          <div>
+            <Button variant="primary" onClick={handleShow} size="sm">
+              Add Events
+            </Button>
+          </div>
+        </div>
+        <div>
+          <div>
+            <p></p>
+          </div>{" "}
+        </div>
+      </center>
+      <Container sx={{ padding: 4 }}>
+        <TableContainer component={Paper}>
+          <Table
+            sx={{ minWidth: 100, fontfamily: "Calibri" }}
+            aria-label="simple table"
+          >
+            <TableHead>
+              <TableRow sx={{ color: "white" }}>
+                {/* <TableCell sx={{ color: "white" }}>S.no</TableCell> */}
+                <TableCell sx={{ color: "white" }}>Event Name</TableCell>
+                <TableCell sx={{ color: "white" }}>Event Link</TableCell>
+                <TableCell sx={{ color: "white" }}>Action</TableCell>
+              </TableRow>
+            </TableHead>
+
+            <TableBody>
+              {users.map((row) => (
+                <TableRow key={row._id}>
+                  {/* <TableCell>{row._id}</TableCell> */}
+                  <TableCell>{row.eventName}</TableCell>
+                  <TableCell>{row.eventLink}</TableCell>
+                  <TableCell>
+                    <div style={{ display: "flex", gap: "10px" }}>
+                      <Button
+                        variant="info"
+                        size="sm"
+                        onClick={() => handleEdit(row)}
+                      >
+                        Edit
+                      </Button>
+                      <Button
+                        size="sm"
+                        variant="danger"
+                        onClick={() => handleDelete(row._id)}
+                      >
+                        Delete
+                      </Button>
+                    </div>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        <div></div>
+      </Container>
     </div>
-  )
+  );
 }
 
 export default EventsTable;
