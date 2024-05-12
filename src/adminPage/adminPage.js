@@ -43,6 +43,7 @@ const RowList = () => {
 
   const navigate = useNavigate();
   const handleLogout = () => {
+    localStorage.removeItem('user');
     navigate("/");
   };
 

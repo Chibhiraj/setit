@@ -21,6 +21,7 @@ function LoginModal() {
     event.preventDefault();
     // Simulate successful login
     if (username === 'admin' && password === '123') {
+      localStorage.setItem('user','test');
       navigate('/admin')
       // Reset form fields
       setUsername('');
