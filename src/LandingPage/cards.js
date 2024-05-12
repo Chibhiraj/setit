@@ -1,8 +1,7 @@
 
 import React, { useState,useEffect } from 'react';
-import { Button, Dialog, DialogTitle, DialogContent, DialogContentText, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper,IconButton } from '@mui/material';
+import { Button, Dialog, DialogTitle, DialogContent, DialogContentText, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 import axios from 'axios';
-import CloseIcon from "@mui/icons-material/Close";
 import cr from '../img/cr.avif';import ctv from '../img/cctv.webp';import Videography from '../img/videography.webp';import hw from '../img/hw.webp';import ups from '../img/ups.webp';import bp from '../img/bp.webp';import emb from '../img/emb.jpg';import jute from '../img/jute.webp';
 import tailor from '../img/tailors.png';import lamination from '../img/lam.webp';import ac from '../img/ac.webp';import art from '../img/art.webp';
 import paper from '../img/paper-bags.webp.png';import org from '../img/herbal-soaps.webp';import mush from '../img/mush.webp';import masal from '../img/masal.webp';import toy from '../img/toy.webp';
@@ -42,17 +41,7 @@ export default function CardsRow() {
 
       <Dialog open={isOpen} onClose={toggleModal}>
         <DialogTitle>Details 
-        <IconButton
-          aria-label="close"
-          onClick={toggleModal}
-          sx={{
-            position: "absolute",
-            right: 8,
-            top: 8,
-          }}
-        >
-          <CloseIcon />
-        </IconButton></DialogTitle>
+        </DialogTitle>
         <DialogContent>
           <DialogContentText>
             <TableContainer component={Paper}>
