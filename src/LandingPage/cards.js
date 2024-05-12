@@ -40,7 +40,8 @@ export default function CardsRow() {
       <div className="row row-cols-1 row-cols-md-3 g-4">
 
       <Dialog open={isOpen} onClose={toggleModal}>
-        <DialogTitle>Details </DialogTitle>
+        <DialogTitle>Details 
+        </DialogTitle>
         <DialogContent>
           <DialogContentText>
             <TableContainer component={Paper}>
