@@ -1,6 +1,5 @@
-import { Modal, Button, Form, Table,Row,Col } from "react-bootstrap";
-import { Navigate, useNavigate } from "react-router";
 import React, { useState,useEffect } from "react";
+import { Modal, Button, Form, Table,Row,Col } from "react-bootstrap";
 import Paper from "@mui/material/Paper";
 import Container from "@mui/material/Container";
 import TableBody from "@mui/material/TableBody";
@@ -14,28 +13,21 @@ const  EventsTable=() =>{
 
   const [rows, setRows] = useState([]);
   const [showModal, setShowModal] = useState(false);
-  const [editUserId, setEditUserId] = useState(null);
+  const [editEventId, setEditEventId] = useState(null);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
   
   const [formData, setFormData] = useState({
     eventName:'',
     eventLink:''
   });
-  const [users, setUsers] = useState([]);
-  const [updatedUser, setUpdatedUser] = useState({
+  const [Events, setEvents] = useState([]);
+  const [updatedEvent, setUpdatedEvent] = useState({
     eventName:'',
     eventLink:'',
   });
   
-  const [deletedUserId, setDeletedUserId] = useState('');
+  const [deletedEventId, setDeletedEventId] = useState('');
   
-  
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  
-  // Function to toggle modal open/close
-  const toggleModal = () => {
-    setIsModalOpen(!isModalOpen);
-  };
   
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -45,12 +37,12 @@ const  EventsTable=() =>{
     }));
   };
   
-  const handleEdit = (user) => {
-    setEditUserId(user._id);
+  const handleEdit = (Event) => {
+    setEditEventId(Event._id);
     setShowUpdateModal(true);
-    setUpdatedUser({ 
-      eventName:user.eventName,
-      eventLink:user.eventLink
+    setUpdatedEvent({ 
+      eventName:Event.eventName,
+      eventLink:Event.eventLink
     });
   };
   const handleSubmit = (e) => {
@@ -78,32 +70,32 @@ const  EventsTable=() =>{
   useEffect(() => {
     axios.get("https://setit-events.onrender.com/")
     .then((response) => {
-      setUsers(response.data);
+      setEvents(response.data);
     })
     .catch((error) => {
-      console.error("Error fetching users:", error.response.data);
+      console.error("Error fetching Events:", error.response.data);
     });
-  }, [users,updatedUser,deletedUserId]);
+  }, [Events,updatedEvent,deletedEventId]);
   
   
   const handleUpdate = () => {
-    axios.put(`https://setit-events.onrender.com/${editUserId}`, updatedUser)
+    axios.put(`https://setit-events.onrender.com/${editEventId}`, updatedEvent)
     .then((response) => {
       
-      console.log("User updated:", response.data);
+      console.log("Event updated:", response.data);
       axios.get("https://setit-events.onrender.com/")
       .then((response) => {
-        setUsers(response.data);
+        setEvents(response.data);
         // setShowModal(false); // Close the edit modal after update
         setShowUpdateModal(false); // Close the edit modal after update
       })
       .catch((error) => {
-        console.error("Error fetching users:", error.response.data);
+        console.error("Error fetching Events:", error.response.data);
       });
     })
     .catch((error) => {
 
-      console.error("Error updating user:", error.response.data);
+      console.error("Error updating Event:", error.response.data);
     });
   };
   
@@ -114,7 +106,7 @@ const  EventsTable=() =>{
     .then((response) => {
       axios.get("https://setit-events.onrender.com/")
       .then((response) => {
-        setUsers(response.data);
+        setEvents(response.data);
       })
       .catch((error) => {
         console.error("Error fetching events:", error.response.data);
@@ -211,10 +203,10 @@ const  EventsTable=() =>{
                       type="text"
                       placeholder="Enter Event name"
                       name="eventName"
-                      value={updatedUser.eventName}
+                      value={updatedEvent.eventName}
                       onChange={(e) =>
-                        setUpdatedUser({
-                          ...updatedUser,
+                        setUpdatedEvent({
+                          ...updatedEvent,
                           eventName: e.target.value,
                         })
                       }
@@ -228,10 +220,10 @@ const  EventsTable=() =>{
                       type="text"
                       placeholder="Enter Event Link"
                       name="eventLink"
-                      value={updatedUser.eventLink}
+                      value={updatedEvent.eventLink}
                       onChange={(e) =>
-                        setUpdatedUser({
-                          ...updatedUser,
+                        setUpdatedEvent({
+                          ...updatedEvent,
                           eventLink: e.target.value,
                         })
                       }
@@ -285,14 +277,14 @@ const  EventsTable=() =>{
             </TableHead>
 
             <TableBody>
-            {users.length===0 ?(
+            {Events.length===0 ?(
               <TableRow>
                 <TableCell colSpan={7} align="center">
                   No current events
                 </TableCell>
               </TableRow>
             ) :(
-              users.map((row) => (
+              Events.map((row) => (
                 <TableRow key={row._id}>
                   {/* <TableCell>{row._id}</TableCell> */}
                   <TableCell>{row.eventName}</TableCell>
