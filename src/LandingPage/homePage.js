@@ -9,6 +9,7 @@ import Logo from '../img/logo.jpg';
 import Card from './cards.js';
 import Gallery from './gallery'
 import Events from './events';
+import SocialHandles from './socialHandles';
 import Button from "react-bootstrap/Button";
 // import LoginPage from "./middleWare"
 import { Link } from 'react-router-dom';
@@ -23,6 +24,7 @@ function Home() {
       <div className='logo' style={{justifyContent: 'center', display:'flex',boxSizing:"content-box",paddingTop:40}} >
         <img src={Logo} style={{}}  className='img-fluid' alt='...' />
       </div>  
+      <SocialHandles/>
       <Offers/>
         <Header />
       <div style={{ textAlign: 'center',paddingTop:10 }}>

@@ -27,13 +27,13 @@ export default function Footer() {
 
   <section className="mb-6 ">
     <h5> Follow us on</h5>
-      <a
+    <a
         className="btn text-white btn-floating m-1"
-        style={{ backgroundColor: '#3b5998' }}
-        href="https://www.facebook.com/cbrseti.tirupur"
+        style={{ backgroundColor:'#17B169' }}
+        href="https://api.whatsapp.com/send/?phone=%2B919489043923&text&type=phone_number&app_absent=0"
         role="button"
       >
-        <i className="fab fa-facebook-f"></i>
+        <i className="fab fa-whatsapp"></i>
       </a>
 
       <a
@@ -43,6 +43,14 @@ export default function Footer() {
         role="button"
       >
         <i className="fab fa-instagram"></i>
+      </a>
+      <a
+        className="btn text-white btn-floating m-1"
+        style={{ backgroundColor: '#3b5998' }}
+        href="https://www.facebook.com/cbrseti.tirupur"
+        role="button"
+      >
+        <i className="fab fa-facebook-f"></i>
       </a>
       <a
         className="btn text-white btn-floating m-1"
@@ -90,9 +98,10 @@ export default function Footer() {
       </section>
       
 
-      <div className="text-center p-4" style={{ backgroundColor: 'rgba(0, 0, 0, 0.05)' }}>
+      <div className="text-center pt-4" style={{ backgroundColor: 'rgba(0, 0, 0, 0.05)' }}>
         © 2024 Copyright 
         <a className="text-reset fw-bold">  RSETI</a>
+        
       </div>
       
     </footer>
