@@ -1,5 +1,6 @@
 import React from 'react';
 import { MDBIcon } from 'mdb-react-ui-kit';
+import Map from './map';
 import Logo from '../img/logo.jpg'
 
 export default function Footer() {
@@ -85,12 +86,13 @@ export default function Footer() {
 
              
             </div>
-            
 
             <div className="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
               <h6 className="text-uppercase fw-bold mb-4">Address:</h6>
               <p><MDBIcon fas icon="home" /> 331/4T , இரண்டாம் தளம்,கோவை டிபார்ட்மெண்ட் ஸ்டோர் காம்ப்ளக்ஸ்,மாவட்ட தொழில் மையம் எதிரில், அவினாசி ரோடு , அனுப்பர்பாளையம் புதூர்,திருப்பூர் – 641652</p>
-          <p><i className="fas fa-location me-2"></i><a href='https://maps.app.goo.gl/d44R9XVoZqLSRLQHA'>Location</a></p>
+              <h6 className="text-uppercase fw-bold mb-4">Location:</h6>
+            <Map/>
+          {/* <p><i className="fas fa-location me-2"></i><a href='https://maps.app.goo.gl/d44R9XVoZqLSRLQHA'>Location</a></p> */}
               
             </div>
           </div>
