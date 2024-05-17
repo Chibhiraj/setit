@@ -11,7 +11,6 @@ import { auto } from "@popperjs/core";
 import axios from "axios";
 import '../App.css';
 
-
 export default function Events() {
   const [events, setEvents] = useState([]);
 
@@ -49,7 +48,7 @@ export default function Events() {
             ) :(events.map(event => (
             < TableRow  className="blinking-event" key={event._id}>
               <TableCell >{event.eventName}</TableCell>
-              <TableCell> <a href="">{event.eventLink}</a></TableCell>
+              <TableCell> <a href={event.eventLink}>Apply here</a></TableCell>
           </TableRow>
         )))}
           </TableBody>
