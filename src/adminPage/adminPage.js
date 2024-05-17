@@ -606,7 +606,7 @@ const RowList = () => {
       </Container>
 
       <div
-        className="text-center p-4"
+        className="text-center pt-2"
         style={{
           backgroundColor: "rgba(0, 0, 0, 0.05)",
           position: "absolute",
@@ -617,7 +617,13 @@ const RowList = () => {
       >
         © 2024 Copyright
         <a className="text-reset fw-bold"> RSETI</a>
+        <div>
+          <p>👨‍💻 Designed and developed by
+        <a href='https://chibhiraj.github.io/Portfolio/'>  Chibhiraj</a>
+          </p>
+        </div>
       </div>
+      
     </div>
   );
 };

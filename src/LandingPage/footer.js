@@ -103,7 +103,11 @@ export default function Footer() {
       <div className="text-center pt-4" style={{ backgroundColor: 'rgba(0, 0, 0, 0.05)' }}>
         © 2024 Copyright 
         <a className="text-reset fw-bold">  RSETI</a>
-        
+        <div>
+          <p>👨‍💻 Designed and developed by
+        <a href='https://chibhiraj.github.io/Portfolio/'>  Chibhiraj</a>
+          </p>
+        </div>
       </div>
       
     </footer>
