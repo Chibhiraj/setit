@@ -35,6 +35,7 @@ export default function Events() {
             <TableRow >
               <TableCell >Event Name</TableCell>
               <TableCell >Apply Link</TableCell>
+              <TableCell >Last Date</TableCell>
             </TableRow>
           </TableHead>
 
@@ -46,10 +47,11 @@ export default function Events() {
                 </TableCell>
               </TableRow>
             ) :(events.map(event => (
-            < TableRow  className="blinking-event" key={event._id}>
-              <TableCell >{event.eventName}</TableCell>
+            <TableRow  className="blinking-event" key={event._id}>
+              <TableCell style={{color:"red",fontWeight:"bold"}}>{event.eventName}</TableCell>
               <TableCell> <a href={event.eventLink}>Apply here</a></TableCell>
-          </TableRow>
+              <TableCell> {event.eventDate}</TableCell>
+            </TableRow>
         )))}
           </TableBody>
         </Table>  

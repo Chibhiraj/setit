@@ -18,12 +18,14 @@ const  EventsTable=() =>{
   
   const [formData, setFormData] = useState({
     eventName:'',
-    eventLink:''
+    eventLink:'',
+    eventDate:''
   });
   const [Events, setEvents] = useState([]);
   const [updatedEvent, setUpdatedEvent] = useState({
     eventName:'',
     eventLink:'',
+    eventDate:'',
   });
   
   const [deletedEventId, setDeletedEventId] = useState('');
@@ -42,15 +44,18 @@ const  EventsTable=() =>{
     setShowUpdateModal(true);
     setUpdatedEvent({ 
       eventName:Event.eventName,
-      eventLink:Event.eventLink
+      eventLink:Event.eventLink,
+      eventDate:Event.eventDate,
     });
   };
   const handleSubmit = (e) => {
     e.preventDefault();
+    // alert(formData.eventDate)
 
     axios.post("https://setit-events.onrender.com/", {
       eventName:formData.eventName,
       eventLink:formData.eventLink,
+      eventDate:formData.eventDate
     })
     .then((response) => {
       console.log(response);
@@ -123,7 +128,8 @@ const  EventsTable=() =>{
     setFormData({
       id:null,
       eventName:"",
-      eventLink:""
+      eventLink:"",
+      eventDate:""
     });
   };
 
@@ -146,7 +152,7 @@ const  EventsTable=() =>{
         <Modal show={showModal} onHide={handleClose}>
           <Modal.Header closeButton>
             <Modal.Title>
-              {formData._id ? "Updating" : "Add Member"}
+              {formData._id ? "Updating" : "Add Event"}
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
@@ -165,6 +171,19 @@ const  EventsTable=() =>{
                   </Form.Group>
                 </Col>
                 <Col>
+                  <Form.Group controlId="eventDate">
+                    <Form.Label>Event Date</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Enter Event date"
+                      name="eventDate"
+                      value={formData.eventDate}
+                      onChange={handleChange}
+                    />
+                  </Form.Group>
+                </Col>
+              </Row>
+                <Col>
                   <Form.Group controlId="eventLink">
                     <Form.Label>Event Link</Form.Label>
                     <Form.Control
@@ -176,7 +195,6 @@ const  EventsTable=() =>{
                     />
                   </Form.Group>
                 </Col>
-              </Row>
             </Form>
           </Modal.Body>
           <Modal.Footer>
@@ -214,6 +232,24 @@ const  EventsTable=() =>{
                   </Form.Group>
                 </Col>
                 <Col>
+                  <Form.Group controlId="eventDate">
+                    <Form.Label>Event date</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Enter Event Date"
+                      name="eventDate"
+                      value={updatedEvent.eventDate}
+                      onChange={(e) =>
+                        setUpdatedEvent({
+                          ...updatedEvent,
+                          eventDate: e.target.value,
+                        })
+                      }
+                    />
+                  </Form.Group>
+                </Col>
+              </Row>
+                <Col>
                   <Form.Group controlId="eventLink">
                     <Form.Label>Event Link</Form.Label>
                     <Form.Control
@@ -230,7 +266,6 @@ const  EventsTable=() =>{
                     />
                   </Form.Group>
                 </Col>
-              </Row>
             </Form>
           </Modal.Body>
           <Modal.Footer>
@@ -272,6 +307,7 @@ const  EventsTable=() =>{
                 {/* <TableCell sx={{ color: "white" }}>S.no</TableCell> */}
                 <TableCell sx={{ color: "white" }}>Event Name</TableCell>
                 <TableCell sx={{ color: "white" }}>Event Link</TableCell>
+                <TableCell sx={{ color: "white" }}>Event Date</TableCell>
                 <TableCell sx={{ color: "white" }}>Action</TableCell>
               </TableRow>
             </TableHead>
@@ -289,6 +325,7 @@ const  EventsTable=() =>{
                   {/* <TableCell>{row._id}</TableCell> */}
                   <TableCell>{row.eventName}</TableCell>
                   <TableCell>{row.eventLink}</TableCell>
+                  <TableCell>{row.eventDate}</TableCell>
                   <TableCell>
                     <div style={{ display: "flex", gap: "10px" }}>
                       <Button
