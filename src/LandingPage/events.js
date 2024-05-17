@@ -35,7 +35,7 @@ export default function Events() {
             <TableRow >
               <TableCell >Event Name</TableCell>
               <TableCell >Apply Link</TableCell>
-              <TableCell >Last Date</TableCell>
+              <TableCell >Last Date to apply</TableCell>
             </TableRow>
           </TableHead>
 
