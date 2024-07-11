@@ -8,13 +8,7 @@ Features
  Registration and login for trainers, trainees, and administrators.
  Profile management for users.
 
-**Course Management:**
-        Browse available courses.
-        Enroll in courses.
 
-**Communication Tools:**
-        Messaging system for communication between users.
- 
 **Event Management:**
         Schedule and manage events such as workshops and training sessions.
 
